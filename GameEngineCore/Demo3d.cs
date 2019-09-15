@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameEngineCore
 {
@@ -32,6 +33,8 @@ namespace GameEngineCore
         private Matrix4x4 _projection;
         private Matrix4x4 _rotateX = new Matrix4x4();
         private Matrix4x4 _rotateZ = new Matrix4x4();
+        private Vector3 _camera = new Vector3();
+
         private float theta;
 
         public Demo3d() : base(512, 480, 4, 4)
@@ -40,35 +43,36 @@ namespace GameEngineCore
 
         protected override void OnInitialize()
         {
-            _cube = new Mesh
-            {
-                Triangles =
-                {
-                    // south
-                    new Triangle(new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 1, 0)),
-                    new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 0), new Vector3(1, 0, 0)),
+            _cube = Mesh.ReadFromFile("ship_concept.obj");
+            //_cube = new Mesh(new List<Triangle>())
+            //{
+            //    Triangles =
+            //    {
+            //        // south
+            //        new Triangle(new Vector3(0, 0, 0), new Vector3(0, 1, 0), new Vector3(1, 1, 0)),
+            //        new Triangle(new Vector3(0, 0, 0), new Vector3(1, 1, 0), new Vector3(1, 0, 0)),
 
-                    // east
-                    new Triangle(new Vector3(1, 0, 0), new Vector3(1, 1, 0), new Vector3(1, 1, 1)),
-                    new Triangle(new Vector3(1, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 1)),
+            //        // east
+            //        new Triangle(new Vector3(1, 0, 0), new Vector3(1, 1, 0), new Vector3(1, 1, 1)),
+            //        new Triangle(new Vector3(1, 0, 0), new Vector3(1, 1, 1), new Vector3(1, 0, 1)),
 
-                    // north
-                    new Triangle(new Vector3(1, 0, 1), new Vector3(1, 1, 1), new Vector3(0, 1, 1)),
-                    new Triangle(new Vector3(1, 0, 1), new Vector3(0, 1, 1), new Vector3(0, 0, 1)),
+            //        // north
+            //        new Triangle(new Vector3(1, 0, 1), new Vector3(1, 1, 1), new Vector3(0, 1, 1)),
+            //        new Triangle(new Vector3(1, 0, 1), new Vector3(0, 1, 1), new Vector3(0, 0, 1)),
 
-                    // west
-                    new Triangle(new Vector3(0, 0, 1), new Vector3(0, 1, 1), new Vector3(0, 1, 0)),
-                    new Triangle(new Vector3(0, 0, 1), new Vector3(0, 1, 0), new Vector3(0, 0, 0)),
+            //        // west
+            //        new Triangle(new Vector3(0, 0, 1), new Vector3(0, 1, 1), new Vector3(0, 1, 0)),
+            //        new Triangle(new Vector3(0, 0, 1), new Vector3(0, 1, 0), new Vector3(0, 0, 0)),
 
-                    // top
-                    new Triangle(new Vector3(0, 1, 0), new Vector3(0, 1, 1), new Vector3(1, 1, 1)),
-                    new Triangle(new Vector3(0, 1, 0), new Vector3(1, 1, 1), new Vector3(1, 1, 0)),
+            //        // top
+            //        new Triangle(new Vector3(0, 1, 0), new Vector3(0, 1, 1), new Vector3(1, 1, 1)),
+            //        new Triangle(new Vector3(0, 1, 0), new Vector3(1, 1, 1), new Vector3(1, 1, 0)),
 
-                    // bottom
-                    new Triangle(new Vector3(1, 0, 1), new Vector3(0, 0, 1), new Vector3(0, 0, 0)),
-                    new Triangle(new Vector3(1, 0, 1), new Vector3(0, 0, 0), new Vector3(1, 0, 0)),
-                }
-            };
+            //        // bottom
+            //        new Triangle(new Vector3(1, 0, 1), new Vector3(0, 0, 1), new Vector3(0, 0, 0)),
+            //        new Triangle(new Vector3(1, 0, 1), new Vector3(0, 0, 0), new Vector3(1, 0, 0)),
+            //    }
+            //};
 
             // Projection matrix
             var near = 0.1f;
@@ -91,11 +95,11 @@ namespace GameEngineCore
 
         protected override bool OnUpdate(double elapsedMs)
         {
-            ClearScreen(Color.ForegroundCyan);
+            ClearScreen(GetColor(Color.Cyan));
 
             theta += (float)(0.001f * elapsedMs);
 
-            // Rotation Z
+            // Update Z rotation matrix
             _rotateZ.M11 = (float)Math.Cos(theta);
             _rotateZ.M12 = (float)Math.Sin(theta);
             _rotateZ.M21 = -(float)Math.Sin(theta);
@@ -103,7 +107,7 @@ namespace GameEngineCore
             _rotateZ.M33 = 1;
             _rotateZ.M44 = 1;
 
-            // Rotation X
+            // Update X rotation matrix
             _rotateX.M11 = 1;
             _rotateX.M22 = (float)Math.Cos(theta * 0.5f);
             _rotateX.M23 = (float)Math.Sin(theta * 0.5f);
@@ -111,43 +115,94 @@ namespace GameEngineCore
             _rotateX.M33 = (float)Math.Cos(theta * 0.5f);
             _rotateX.M44 = 1;
 
-            // Draw Triangles
+            var trianglesToDraw = new List<Triangle>();
+
+            // Cull Triangles
             foreach (var triangle in _cube.Triangles)
             {
-                // move triangle back
-
+                // rotate in Z axis
                 var rotatedZ = MultiplyMatrixVector(triangle, _rotateZ);
+
+                // rotate in X axis
                 var rotatedZX = MultiplyMatrixVector(rotatedZ, _rotateX);
 
+                // move triangle back
                 var translatedTriangle = rotatedZX;
-                translatedTriangle.A.Z += 3.0f;
-                translatedTriangle.B.Z += 3.0f;
-                translatedTriangle.C.Z += 3.0f;
+                translatedTriangle.A.Z += 5.0f;
+                translatedTriangle.B.Z += 5.0f;
+                translatedTriangle.C.Z += 5.0f;
 
-                // project into screen coordinates
-                var triangleProjected = MultiplyMatrixVector(translatedTriangle, _projection);
+                // calculate normal
 
-                // scale into view
-                triangleProjected.A.X += 1.0f;
-                triangleProjected.A.Y += 1.0f;
+                var line1 = translatedTriangle.B - translatedTriangle.A;
+                var line2 = translatedTriangle.C - translatedTriangle.A;
 
-                triangleProjected.B.X += 1.0f;
-                triangleProjected.B.Y += 1.0f;
+                var normal = Vector3.Cross(line1, line2).Normalize();
 
-                triangleProjected.C.X += 1.0f;
-                triangleProjected.C.Y += 1.0f;
+                // Get Vector from from A to the camera, and compare to normal
+                //
+                // We can use any point of the triangle because all points of
+                // the triangle are in the same plane
+                var dot = Vector3.Dot(normal, translatedTriangle.A - _camera);
 
-                triangleProjected.A.X *= 0.5f * ScreenWidth;
-                triangleProjected.A.Y *= 0.5f * ScreenHeight;
-                triangleProjected.B.X *= 0.5f * ScreenWidth;
-                triangleProjected.B.Y *= 0.5f * ScreenHeight;
-                triangleProjected.C.X *= 0.5f * ScreenWidth;
-                triangleProjected.C.Y *= 0.5f * ScreenHeight;
+                // if dot is less than 0 then the vectors are either perpendicular or
+                // facing in the other direction so therefore are not visible
+                if (dot < 0f)
+                {
+                    // project from 3d to 2d screen coordinates
+                    var triangleProjected = MultiplyMatrixVector(translatedTriangle, _projection);
 
+                    // Illumination
+                    var lightDirection = new Vector3(0, 0, -1)  // toward user
+                            .Normalize()
+                        ;
+
+                    var dp = Vector3.Dot(normal, lightDirection);
+                    triangleProjected.Color = GetColor(dp);
+
+                    // scale into view
+                    triangleProjected.A.X += 1.0f;
+                    triangleProjected.A.Y += 1.0f;
+
+                    triangleProjected.B.X += 1.0f;
+                    triangleProjected.B.Y += 1.0f;
+
+                    triangleProjected.C.X += 1.0f;
+                    triangleProjected.C.Y += 1.0f;
+
+                    triangleProjected.A.X *= 0.5f * ScreenWidth;
+                    triangleProjected.A.Y *= 0.5f * ScreenHeight;
+                    triangleProjected.B.X *= 0.5f * ScreenWidth;
+                    triangleProjected.B.Y *= 0.5f * ScreenHeight;
+                    triangleProjected.C.X *= 0.5f * ScreenWidth;
+                    triangleProjected.C.Y *= 0.5f * ScreenHeight;
+
+                    trianglesToDraw.Add(triangleProjected);
+                }
+            }
+
+            // sort triangles from back to front
+            trianglesToDraw.Sort((t1, t2) =>
+            {
+                var z1 = (t1.A.Z + t1.B.Z + t1.C.Z) / 3;
+                var z2 = (t2.A.Z + t2.B.Z + t2.C.Z) / 3;
+
+                return z1 > z2 ? -1 : z2 > z1 ? 1 : 0;
+            });
+
+            foreach (var triangle in trianglesToDraw)
+            {
+                FillTriangle(
+                    (int)triangle.A.X, (int)triangle.A.Y,
+                    (int)triangle.B.X, (int)triangle.B.Y,
+                    (int)triangle.C.X, (int)triangle.C.Y,
+                    triangle.Color
+                );
                 DrawTriangle(
-                    (int)triangleProjected.A.X, (int)triangleProjected.A.Y,
-                    (int)triangleProjected.B.X, (int)triangleProjected.B.Y,
-                    (int)triangleProjected.C.X, (int)triangleProjected.C.Y
+                    (int)triangle.A.X, (int)triangle.A.Y,
+                    (int)triangle.B.X, (int)triangle.B.Y,
+                    (int)triangle.C.X, (int)triangle.C.Y,
+                    color: GetColor(Color.Black)
                 );
             }
 

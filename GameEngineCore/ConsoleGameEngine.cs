@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
 using Microsoft.Win32.SafeHandles;
@@ -12,7 +13,7 @@ namespace GameEngineCore
     {
         private Window _window;
         private Renderer _renderer;
-        private MovingAverage _average = new MovingAverage();
+        private readonly MovingAverage _average = new MovingAverage();
 
         public int ScreenWidth { get; }
         public int ScreenHeight { get; }
@@ -30,8 +31,6 @@ namespace GameEngineCore
 
         private void Initialize()
         {
-            // https://www.youtube.com/watch?v=cWc0hgYwZyc
-
             if (SDL.Init((uint)InitFlags.SDL_INIT_VIDEO) != 0)
             {
                 throw new InvalidOperationException("Failed to init SDL");
@@ -70,7 +69,7 @@ namespace GameEngineCore
             SDL_mouse.ShowCursor(0);
 
             double t1 = Stopwatch.GetTimestamp();
-            var evnt = new Event();
+            //var evnt = new Event();
             while (this.Active)
             {
                 // Handle Timing
@@ -83,7 +82,7 @@ namespace GameEngineCore
 
                 // Handle events - we only care about mouse clicks and movement
 
-                while (SDL_events.PollEvent(evnt) != 0)
+                while (SDL_events.PollEvent(out Event evnt) != 0)
                 {
                     switch (evnt.Type)
                     {
@@ -124,95 +123,100 @@ namespace GameEngineCore
             return true;
         }
 
-        protected void Draw(int x, int y, PixelType c = PixelType.PixelSolid, Color color = Color.ForegroundWhite)
-        {
-            Draw(x, y, (char)c, color);
-        }
-
-        protected void Draw(int x, int y, char c = (char)0x2588, Color color = Color.ForegroundWhite)
+        protected void Draw(int x, int y, Vector3? color = null)
         {
             if (x >= 0 && x < this.ScreenWidth && y >= 0 && y < this.ScreenHeight)
             {
-                SetColor(color);
+                SetColor(color ?? Vector3.One);
                 SDL_render.RenderDrawPoint(_renderer, x, y);
             }
         }
 
-        private void SetColor(Color color)
+        protected Vector3 GetColor(float value)
         {
+            // value is in -1 to 1
+
+            if (value < 0)
+            {
+                //var f = 255 - (int)(255 * value);
+                //var step = f / 32;
+                //return new Vector3(step * 32, step * 32, step * 32);
+                return Vector3.Zero;
+            }
+            else
+            {
+                var f = (int)(16 * value) * 12;
+                return new Vector3(f, f, f);
+            }
+        }
+
+        protected Vector3 GetColor(Color color)
+        {
+            var b = 255f;
             switch (color)
             {
-                case Color.ForegroundBlack:
-                    SDL_render.SetRenderDrawColor(_renderer, 12, 12, 12, 255);
-                    break;
+                case Color.Black:
+                    return new Vector3(12, 12, 12) / b;
 
-                case Color.ForegroundDarkBlue:
-                    SDL_render.SetRenderDrawColor(_renderer, 0, 55, 218, 255);
-                    break;
+                case Color.DarkBlue:
+                    return new Vector3(0, 55, 218) / b;
 
-                case Color.ForegroundDarkGreen:
-                    SDL_render.SetRenderDrawColor(_renderer, 19, 161, 14, 255);
-                    break;
+                case Color.DarkGreen:
+                    return new Vector3(19, 161, 14) / b;
 
-                case Color.ForegroundDarkCyan:
-                    SDL_render.SetRenderDrawColor(_renderer, 58, 150, 221, 255);
-                    break;
+                case Color.DarkCyan:
+                    return new Vector3(58, 150, 221) / b;
 
-                case Color.ForegroundDarkRed:
-                    SDL_render.SetRenderDrawColor(_renderer, 197, 15, 31, 255);
-                    break;
+                case Color.DarkRed:
+                    return new Vector3(197, 15, 31) / b;
 
-                case Color.ForegroundDarkMagenta:
-                    SDL_render.SetRenderDrawColor(_renderer, 136, 23, 152, 255);
-                    break;
+                case Color.DarkMagenta:
+                    return new Vector3(136, 23, 152) / b;
 
-                case Color.ForegroundDarkYellow:
-                    SDL_render.SetRenderDrawColor(_renderer, 193, 156, 0, 255);
-                    break;
+                case Color.DarkYellow:
+                    return new Vector3(193, 156, 0) / b;
 
-                case Color.ForegroundGrey:
-                    SDL_render.SetRenderDrawColor(_renderer, 204, 204, 204, 255);
-                    break;
+                case Color.Grey:
+                    return new Vector3(204, 204, 204) / b;
 
-                case Color.ForegroundDarkGrey:
-                    SDL_render.SetRenderDrawColor(_renderer, 118, 118, 118, 255);
-                    break;
+                case Color.DarkGrey:
+                    return new Vector3(118, 118, 118) / b;
 
-                case Color.ForegroundBlue:
-                    SDL_render.SetRenderDrawColor(_renderer, 59, 120, 255, 255);
-                    break;
+                case Color.Blue:
+                    return new Vector3(59, 120, 255) / b;
 
-                case Color.ForegroundGreen:
-                    SDL_render.SetRenderDrawColor(_renderer, 22, 198, 12, 255);
-                    break;
+                case Color.Green:
+                    return new Vector3(22, 198, 12) / b;
 
-                case Color.ForegroundCyan:
-                    SDL_render.SetRenderDrawColor(_renderer, 97, 214, 214, 255);
-                    break;
+                case Color.Cyan:
+                    return new Vector3(97, 214, 214) / b;
 
-                case Color.ForegroundRed:
-                    SDL_render.SetRenderDrawColor(_renderer, 231, 72, 86, 255);
-                    break;
+                case Color.Red:
+                    return new Vector3(231, 72, 86) / b;
 
-                case Color.ForegroundMagenta:
-                    SDL_render.SetRenderDrawColor(_renderer, 180, 0, 158, 255);
-                    break;
+                case Color.Magenta:
+                    return new Vector3(180, 0, 158) / b;
 
-                case Color.ForegroundYellow:
-                    SDL_render.SetRenderDrawColor(_renderer, 249, 241, 165, 255);
-                    break;
+                case Color.Yellow:
+                    return new Vector3(249, 241, 165) / b;
 
-                case Color.ForegroundWhite:
-                    SDL_render.SetRenderDrawColor(_renderer, 242, 242, 242, 255);
-                    break;
+                case Color.White:
+                    return new Vector3(242, 242, 242) / b;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(color), color, null);
             }
         }
 
-        protected void DrawString(int x, int y, string s, Color color = Color.ForegroundWhite)
+        private void SetColor(Vector3 color)
         {
+            SDL_render.SetRenderDrawColor(_renderer, (byte)(color.X * 255), (byte)(color.Y * 255), (byte)(color.Z * 255), 255);
+        }
+
+        protected void DrawString(int x, int y, string s, Color color = Color.White)
+        {
+            int keys;
+
             for (int i = 0; i < s.Length; i++)
             {
                 //Draw(x + i, y, s[i], color);
@@ -222,14 +226,321 @@ namespace GameEngineCore
             }
         }
 
-        protected void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, PixelType c = PixelType.PixelSolid, Color color = Color.ForegroundWhite)
+        protected void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Vector3? color)
         {
-            DrawLine(x1, y1, x2, y2, c, color);
-            DrawLine(x2, y2, x3, y3, c, color);
-            DrawLine(x3, y3, x1, y1, c, color);
+            DrawLine(x1, y1, x2, y2, color);
+            DrawLine(x2, y2, x3, y3, color);
+            DrawLine(x3, y3, x1, y1, color);
         }
 
-        protected void DrawLine(int x1, int y1, int x2, int y2, PixelType c = PixelType.PixelSolid, Color col = Color.ForegroundWhite)
+        // https://www.avrfreaks.net/sites/default/files/triangles.c
+        protected void FillTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Vector3? col)
+        {
+            void Swap(ref int swapX, ref int swapY)
+            {
+                var t = swapX;
+                swapX = swapY;
+                swapY = t;
+            }
+
+            void Drawline(int sx, int ex, int ny)
+            {
+                for (var i = sx; i <= ex; i++)
+                {
+                    Draw(i, ny, col);
+                }
+            };
+
+            int t2x;
+            int y;
+            int minx;
+            int maxx;
+            int t1xp;
+            int t2xp;
+            bool changed1 = false;
+            bool changed2 = false;
+            int signx1, signx2;
+            int e1;
+            // Sort vertices
+            if (y1 > y2)
+            {
+                Swap(ref y1, ref y2);
+                Swap(ref x1, ref x2);
+            }
+
+            if (y1 > y3)
+            {
+                Swap(ref y1, ref y3);
+                Swap(ref x1, ref x3);
+            }
+
+            if (y2 > y3)
+            {
+                Swap(ref y2, ref y3);
+                Swap(ref x2, ref x3);
+            }
+
+            var t1x = t2x = x1; y = y1;   // Starting points
+            var dx1 = (int)(x2 - x1);
+            if (dx1 < 0)
+            {
+                dx1 = -dx1;
+                signx1 = -1;
+            }
+            else
+            {
+                signx1 = 1;
+            }
+            var dy1 = (int)(y2 - y1);
+
+            var dx2 = (int)(x3 - x1);
+            if (dx2 < 0)
+            {
+                dx2 = -dx2;
+                signx2 = -1;
+            }
+            else
+            {
+                signx2 = 1;
+            }
+            var dy2 = (int)(y3 - y1);
+
+            if (dy1 > dx1)
+            {   // swap values
+                Swap(ref dx1, ref dy1);
+                changed1 = true;
+            }
+            if (dy2 > dx2)
+            {   // swap values
+                Swap(ref dy2, ref dx2);
+                changed2 = true;
+            }
+
+            var e2 = (int)(dx2 >> 1);
+            // Flat top, just process the second half
+            if (y1 == y2)
+            {
+                goto next;
+            }
+            e1 = (int)(dx1 >> 1);
+
+            for (int i = 0; i < dx1;)
+            {
+                t1xp = 0; t2xp = 0;
+                if (t1x < t2x)
+                {
+                    minx = t1x;
+                    maxx = t2x;
+                }
+                else
+                {
+                    minx = t2x;
+                    maxx = t1x;
+                }
+                // process first line until y value is about to change
+                while (i < dx1)
+                {
+                    i++;
+                    e1 += dy1;
+                    while (e1 >= dx1)
+                    {
+                        e1 -= dx1;
+                        if (changed1)
+                        {
+                            t1xp = signx1;
+                            //t1x += signx1;
+                        }
+                        else
+                        {
+                            goto next1;
+                        }
+                    }
+
+                    if (changed1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        t1x += signx1;
+                    }
+                }
+            // Move line
+            next1:
+                // process second line until y value is about to change
+                while (true)
+                {
+                    e2 += dy2;
+                    while (e2 >= dx2)
+                    {
+                        e2 -= dx2;
+                        if (changed2)
+                        {
+                            t2xp = signx2; //t2x += signx2;
+                        }
+                        else
+                        {
+                            goto next2;
+                        }
+                    }
+
+                    if (changed2)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        t2x += signx2;
+                    }
+                }
+            next2:
+                if (minx > t1x)
+                {
+                    minx = t1x;
+                }
+
+                if (minx > t2x)
+                {
+                    minx = t2x;
+                }
+
+                if (maxx < t1x)
+                {
+                    maxx = t1x;
+                }
+
+                if (maxx < t2x)
+                {
+                    maxx = t2x;
+                }
+                Drawline(minx, maxx, y);    // Draw line from min to max points found on the y
+                                            // Now increase y
+                if (!changed1) t1x += signx1;
+                t1x += t1xp;
+                if (!changed2) t2x += signx2;
+                t2x += t2xp;
+                y += 1;
+                if (y == y2) break;
+            }
+        next:
+            // Second half
+            dx1 = (int)(x3 - x2);
+            if (dx1 < 0)
+            {
+                dx1 = -dx1;
+                signx1 = -1;
+            }
+            else
+            {
+                signx1 = 1;
+            }
+            dy1 = (int)(y3 - y2);
+            t1x = x2;
+
+            if (dy1 > dx1)
+            {   // swap values
+                Swap(ref dy1, ref dx1);
+                changed1 = true;
+            }
+            else
+            {
+                changed1 = false;
+            }
+
+            e1 = (int)(dx1 >> 1);
+
+            for (var i = 0; i <= dx1; i++)
+            {
+                t1xp = 0; t2xp = 0;
+                if (t1x < t2x)
+                {
+                    minx = t1x;
+                    maxx = t2x;
+                }
+                else
+                {
+                    minx = t2x;
+                    maxx = t1x;
+                }
+                // process first line until y value is about to change
+                while (i < dx1)
+                {
+                    e1 += dy1;
+                    while (e1 >= dx1)
+                    {
+                        e1 -= dx1;
+                        if (changed1) { t1xp = signx1; break; }//t1x += signx1;
+                        else goto next3;
+                    }
+                    if (changed1) break;
+                    else t1x += signx1;
+                    if (i < dx1) i++;
+                }
+            next3:
+                // process second line until y value is about to change
+                while (t2x != x3)
+                {
+                    e2 += dy2;
+                    while (e2 >= dx2)
+                    {
+                        e2 -= dx2;
+                        if (changed2)
+                        {
+                            t2xp = signx2;
+                        }
+                        else
+                        {
+                            goto next4;
+                        }
+                    }
+
+                    if (changed2)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        t2x += signx2;
+                    }
+                }
+            next4:
+
+                if (minx > t1x)
+                {
+                    minx = t1x;
+                }
+
+                if (minx > t2x)
+                {
+                    minx = t2x;
+                }
+
+                if (maxx < t1x)
+                {
+                    maxx = t1x;
+                }
+
+                if (maxx < t2x)
+                {
+                    maxx = t2x;
+                }
+                Drawline(minx, maxx, y);
+                if (!changed1)
+                {
+                    t1x += signx1;
+                }
+                t1x += t1xp;
+                if (!changed2)
+                {
+                    t2x += signx2;
+                }
+                t2x += t2xp;
+                y += 1;
+                if (y > y3) return;
+            }
+        }
+
+        protected void DrawLine(int x1, int y1, int x2, int y2, Vector3? col = null)
         {
             var dx = x2 - x1;
             var dy = y2 - y1;
@@ -259,7 +570,7 @@ namespace GameEngineCore
                     xe = x1;
                 }
 
-                Draw(x, y, c, col);
+                Draw(x, y, col);
 
                 while (x < xe)
                 {
@@ -282,7 +593,7 @@ namespace GameEngineCore
                         px += 2 * (dy1 - dx1);
                     }
 
-                    Draw(x, y, c, col);
+                    Draw(x, y, col);
                 }
             }
             else
@@ -300,7 +611,7 @@ namespace GameEngineCore
                     ye = y1;
                 }
 
-                Draw(x, y, c, col);
+                Draw(x, y, col);
 
                 while (y < ye)
                 {
@@ -321,7 +632,7 @@ namespace GameEngineCore
                         }
                         py += 2 * (dx1 - dy1);
                     }
-                    Draw(x, y, c, col);
+                    Draw(x, y, col);
                 }
             }
         }
@@ -334,18 +645,13 @@ namespace GameEngineCore
             if (y >= ScreenHeight) y = ScreenHeight;
         }
 
-        protected void ClearScreen(Color color)
+        protected void ClearScreen(Vector3? color = null)
         {
-            SetColor(color);
+            SetColor(color ?? GetColor(Color.Cyan));
             SDL_render.RenderClear(_renderer);
         }
 
-        protected void Fill(int x1, int y1, int x2, int y2, PixelType c = PixelType.PixelSolid, Color color = Color.ForegroundWhite)
-        {
-            Fill(x1, y1, x2, y2, (char)c, color);
-        }
-
-        protected void Fill(int x1, int y1, int x2, int y2, char c, Color color = Color.ForegroundWhite)
+        protected void Fill(int x1, int y1, int x2, int y2, Vector3? color = null)
         {
             Clip(ref x1, ref y1);
             Clip(ref x2, ref y2);
@@ -354,7 +660,7 @@ namespace GameEngineCore
             {
                 for (int y = y1; y < y2; y++)
                 {
-                    Draw(x, y, c, color);
+                    Draw(x, y, color);
                 }
             }
         }

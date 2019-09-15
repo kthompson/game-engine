@@ -96,8 +96,9 @@ namespace SharpSDLGen
 
             ctx.IgnoreClassWithName("Windowsio");
 
-            var y = ctx.FindDecl<Namespace>("SDL_video").FirstOrDefault();
-            var tu = ctx.TranslationUnits.Find(x => x.FileNameWithoutExtension == "SDL_video");
+            ctx.SetFunctionParameterUsage("SDL_PollEvent", 1, ParameterUsage.Out);
+
+            //ctx.SetMethodParameterUsage();
         }
 
         public void Postprocess(Driver driver, ASTContext ctx)
@@ -112,11 +113,8 @@ namespace SharpSDLGen
             ctx.SetClassBindName("assert_data", "AssertData");
             ctx.SetNameOfEnumWithName("eventaction", "EventAction");
             ctx.SetNameOfEnumWithName("LOG_CATEGORY", "LogCategory");
-            var unit = ctx.TranslationUnits.Find(x => x.FileNameWithoutExtension == "SDL_video");
-            Console.WriteLine(unit.LogicalName);
-            //unit.Declarations
-            ;// .Name = "SDLVideo";
-            //var tu = ctx.TranslationUnits.Find(x => x.FileNameWithoutExtension == "SDL_video");
+
+            //var pollEvent = ctx.FindFunction("SDL_PollEvent").First();
         }
 
         public static string GetSourceDirectory(string name)

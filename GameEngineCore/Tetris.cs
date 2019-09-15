@@ -95,7 +95,8 @@ namespace GameEngineCore
                 }
             }
 
-            Fill(0, 0, ScreenWidth, ScreenHeight, ' ');
+            ClearScreen();
+            //Fill(0, 0, ScreenWidth, ScreenHeight, ' ');
         }
 
         protected override bool OnUpdate(double elapsedMs)
@@ -227,7 +228,7 @@ namespace GameEngineCore
             {
                 for (int y = 0; y < fieldHeight; y++)
                 {
-                    Draw(x + 2, y + 2, _glyphs[_field[y * fieldWidth + x]]);
+                    Draw(x + 2, y + 2);
                 }
             }
 
@@ -238,15 +239,13 @@ namespace GameEngineCore
                 {
                     if (tetrominos[_currentPiece][Rotate(px, py, _currentRotation)] == 'X')
                     {
-                        Draw(_currentX + px + 2, _currentY + py + 2, (char)(_currentPiece + 65));
+                        Draw(_currentX + px + 2, _currentY + py + 2);
                     }
                 }
             }
 
             // Draw score
             DrawString(fieldWidth + 6, 2, $"SCORE: {_score:C0}");
-
-            // https://www.youtube.com/watch?v=8OK8_tHeCIA&t=1108s
 
             if (_lines.Count > 0)
             {
