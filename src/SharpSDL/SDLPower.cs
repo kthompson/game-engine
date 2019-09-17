@@ -25,7 +25,7 @@ namespace SharpSDL
         POWERSTATE_CHARGED = 4
     }
 
-    public unsafe partial class SDL_power
+    public unsafe partial class SDLPower
     {
         public partial struct __Internal
         {

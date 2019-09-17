@@ -841,7 +841,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_pixels
+    public unsafe partial class SDLPixels
     {
         public partial struct __Internal
         {

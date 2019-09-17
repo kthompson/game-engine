@@ -465,7 +465,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_video
+    public unsafe partial class SDLVideo
     {
         public partial struct __Internal
         {

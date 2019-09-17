@@ -362,7 +362,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_surface
+    public unsafe partial class SDLSurface
     {
         public partial struct __Internal
         {

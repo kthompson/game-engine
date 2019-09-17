@@ -57,7 +57,7 @@ namespace SharpSDL
     [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(global::System.Runtime.InteropServices.CallingConvention.Cdecl)]
     public unsafe delegate void LogOutputFunction(global::System.IntPtr userdata, int category, global::SharpSDL.LogPriority priority, [MarshalAs(UnmanagedType.LPStr)] string message);
 
-    public unsafe partial class SDL_log
+    public unsafe partial class SDLLog
     {
         public partial struct __Internal
         {

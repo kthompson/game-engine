@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
@@ -38,14 +40,14 @@ namespace GameEngineCore
 
             // TODO: enable mouse input
 
-            _window = SDL_video.CreateWindow("Hello World!", 30, 30, ScreenWidth, ScreenHeight, (uint)(WindowFlags.WINDOW_SHOWN | WindowFlags.WINDOW_RESIZABLE));
+            _window = SDLVideo.CreateWindow("Hello World!", 30, 30, ScreenWidth, ScreenHeight, (uint)(WindowFlags.WINDOW_SHOWN | WindowFlags.WINDOW_RESIZABLE));
             if (_window == null)
             {
                 SDL.Quit();
                 throw new InvalidOperationException("Failed to create window");
             }
 
-            _renderer = SDL_render.CreateRenderer(_window, -1,
+            _renderer = SDLRender.CreateRenderer(_window, -1,
                 (uint)(RendererFlags.RENDERER_ACCELERATED));
 
             if (_renderer == null)
@@ -61,12 +63,16 @@ namespace GameEngineCore
         {
         }
 
+        private bool[] _keys = null;
+
+        protected bool IsKeyPressed(ScanCode code) => _keys[(int)code];
+
         public void Run()
         {
             this.Initialize();
 
             this.Active = true;
-            SDL_mouse.ShowCursor(0);
+            SDLMouse.ShowCursor(0);
 
             double t1 = Stopwatch.GetTimestamp();
             //var evnt = new Event();
@@ -74,22 +80,28 @@ namespace GameEngineCore
             {
                 // Handle Timing
                 double t2 = Stopwatch.GetTimestamp();
-                var elapsed = (t2 - t1) / TimeSpan.TicksPerMillisecond;
-                var elapsedS = (t2 - t1) / TimeSpan.TicksPerSecond;
+                var elapsedTicks = t2 - t1;
+                var elapsed = elapsedTicks / TimeSpan.TicksPerMillisecond;
+                var elapsedS = elapsedTicks / TimeSpan.TicksPerSecond;
                 t1 = t2;
 
                 // Handle Keyboard Input
 
                 // Handle events - we only care about mouse clicks and movement
-
-                while (SDL_events.PollEvent(out Event evnt) != 0)
+                _keys = SDLKeyboard.GetKeyboardState().ToArray();
+                while (SDLEvents.PollEvent2(out var evnt) != 0)
                 {
                     switch (evnt.Type)
                     {
                         case (uint)EventType.QUIT:
-                        case (uint)EventType.KEYDOWN:
-                        case (uint)EventType.MOUSEBUTTONDOWN:
                             break;
+
+                        case (uint)EventType.KEYDOWN:
+                            //var keyboardEvent = evnt.Key;
+                            //var keysym = keyboardEvent.Keysym;
+                            //Console.WriteLine($"Adding key event: {keysym.Scancode}");
+                            //_keys[keysym.Scancode] = keysym;
+                            continue;
 
                         default:
                             Console.WriteLine($"Event: {evnt.Type}");
@@ -100,39 +112,39 @@ namespace GameEngineCore
                     break;
                 }
 
-                if (!this.OnUpdate(elapsed))
+                if (!this.OnUpdate(elapsedS))
                 {
                     this.Active = false;
                 }
 
-                SDL_video.SetWindowTitle(_window, $"Console Game Engine - FPS: {1.0 / _average.ComputeAverage(elapsedS):F4}");
+                SDLVideo.SetWindowTitle(_window, $"Console Game Engine - FPS: {1.0 / _average.ComputeAverage(elapsedS):F4}");
 
                 PresentFrame();
             }
 
-            SDL_mouse.ShowCursor(1);
+            SDLMouse.ShowCursor(1);
         }
 
         protected void PresentFrame()
         {
-            SDL_render.RenderPresent(_renderer);
+            SDLRender.RenderPresent(_renderer);
         }
 
-        protected virtual bool OnUpdate(double elapsedMs)
+        protected virtual bool OnUpdate(double elapsedSeconds)
         {
             return true;
         }
 
-        protected void Draw(int x, int y, Vector3? color = null)
+        protected void Draw(int x, int y, Vector4? color = null)
         {
             if (x >= 0 && x < this.ScreenWidth && y >= 0 && y < this.ScreenHeight)
             {
-                SetColor(color ?? Vector3.One);
-                SDL_render.RenderDrawPoint(_renderer, x, y);
+                SetColor(color ?? Vector4.One);
+                SDLRender.RenderDrawPoint(_renderer, x, y);
             }
         }
 
-        protected Vector3 GetColor(float value)
+        protected Vector4 GetColor(float value)
         {
             // value is in -1 to 1
 
@@ -141,76 +153,76 @@ namespace GameEngineCore
                 //var f = 255 - (int)(255 * value);
                 //var step = f / 32;
                 //return new Vector3(step * 32, step * 32, step * 32);
-                return Vector3.Zero;
+                return Vector4.UnitW;
             }
             else
             {
                 var f = (int)(16 * value) * 12;
-                return new Vector3(f, f, f);
+                return new Vector4(f, f, f, 1);
             }
         }
 
-        protected Vector3 GetColor(Color color)
+        protected Vector4 GetColor(Color color)
         {
             var b = 255f;
             switch (color)
             {
                 case Color.Black:
-                    return new Vector3(12, 12, 12) / b;
+                    return new Vector4(12 / b, 12 / b, 12 / b, 1);
 
                 case Color.DarkBlue:
-                    return new Vector3(0, 55, 218) / b;
+                    return new Vector4(0, 55 / b, 218 / b, 1);
 
                 case Color.DarkGreen:
-                    return new Vector3(19, 161, 14) / b;
+                    return new Vector4(19 / b, 161 / b, 14 / b, 1);
 
                 case Color.DarkCyan:
-                    return new Vector3(58, 150, 221) / b;
+                    return new Vector4(58 / b, 150 / b, 221 / b, 1);
 
                 case Color.DarkRed:
-                    return new Vector3(197, 15, 31) / b;
+                    return new Vector4(197 / b, 15 / b, 31 / b, 1);
 
                 case Color.DarkMagenta:
-                    return new Vector3(136, 23, 152) / b;
+                    return new Vector4(136 / b, 23 / b, 152 / b, 1);
 
                 case Color.DarkYellow:
-                    return new Vector3(193, 156, 0) / b;
+                    return new Vector4(193 / b, 156 / b, 0 / b, 1);
 
                 case Color.Grey:
-                    return new Vector3(204, 204, 204) / b;
+                    return new Vector4(204 / b, 204 / b, 204 / b, 1);
 
                 case Color.DarkGrey:
-                    return new Vector3(118, 118, 118) / b;
+                    return new Vector4(118 / b, 118 / b, 118 / b, 1);
 
                 case Color.Blue:
-                    return new Vector3(59, 120, 255) / b;
+                    return new Vector4(59 / b, 120 / b, 255 / b, 1);
 
                 case Color.Green:
-                    return new Vector3(22, 198, 12) / b;
+                    return new Vector4(22 / b, 198 / b, 12 / b, 1);
 
                 case Color.Cyan:
-                    return new Vector3(97, 214, 214) / b;
+                    return new Vector4(97 / b, 214 / b, 214 / b, 1);
 
                 case Color.Red:
-                    return new Vector3(231, 72, 86) / b;
+                    return new Vector4(231 / b, 72 / b, 86 / b, 1);
 
                 case Color.Magenta:
-                    return new Vector3(180, 0, 158) / b;
+                    return new Vector4(180 / b, 0, 158 / b, 1);
 
                 case Color.Yellow:
-                    return new Vector3(249, 241, 165) / b;
+                    return new Vector4(249 / b, 241 / b, 165 / b, 1);
 
                 case Color.White:
-                    return new Vector3(242, 242, 242) / b;
+                    return new Vector4(242 / b, 242 / b, 242 / b, 1);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(color), color, null);
             }
         }
 
-        private void SetColor(Vector3 color)
+        private void SetColor(Vector4 color)
         {
-            SDL_render.SetRenderDrawColor(_renderer, (byte)(color.X * 255), (byte)(color.Y * 255), (byte)(color.Z * 255), 255);
+            SDLRender.SetRenderDrawColor(_renderer, (byte)(color.X * 255), (byte)(color.Y * 255), (byte)(color.Z * 255), (byte)(color.W * 255));
         }
 
         protected void DrawString(int x, int y, string s, Color color = Color.White)
@@ -226,7 +238,7 @@ namespace GameEngineCore
             }
         }
 
-        protected void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Vector3? color)
+        protected void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Vector4? color)
         {
             DrawLine(x1, y1, x2, y2, color);
             DrawLine(x2, y2, x3, y3, color);
@@ -234,7 +246,7 @@ namespace GameEngineCore
         }
 
         // https://www.avrfreaks.net/sites/default/files/triangles.c
-        protected void FillTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Vector3? col)
+        protected void FillTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Vector4? col)
         {
             void Swap(ref int swapX, ref int swapY)
             {
@@ -540,7 +552,7 @@ namespace GameEngineCore
             }
         }
 
-        protected void DrawLine(int x1, int y1, int x2, int y2, Vector3? col = null)
+        protected void DrawLine(int x1, int y1, int x2, int y2, Vector4? col = null)
         {
             var dx = x2 - x1;
             var dy = y2 - y1;
@@ -645,13 +657,13 @@ namespace GameEngineCore
             if (y >= ScreenHeight) y = ScreenHeight;
         }
 
-        protected void ClearScreen(Vector3? color = null)
+        protected void ClearScreen(Vector4? color = null)
         {
             SetColor(color ?? GetColor(Color.Cyan));
-            SDL_render.RenderClear(_renderer);
+            SDLRender.RenderClear(_renderer);
         }
 
-        protected void Fill(int x1, int y1, int x2, int y2, Vector3? color = null)
+        protected void Fill(int x1, int y1, int x2, int y2, Vector4? color = null)
         {
             Clip(ref x1, ref y1);
             Clip(ref x2, ref y2);
@@ -667,8 +679,8 @@ namespace GameEngineCore
 
         private void ReleaseUnmanagedResources()
         {
-            SDL_render.DestroyRenderer(_renderer);
-            SDL_video.DestroyWindow(_window);
+            SDLRender.DestroyRenderer(_renderer);
+            SDLVideo.DestroyWindow(_window);
             SDL.Quit();
         }
 

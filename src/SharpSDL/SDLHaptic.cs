@@ -2150,7 +2150,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_haptic
+    public unsafe partial class SDLHaptic
     {
         public partial struct __Internal
         {

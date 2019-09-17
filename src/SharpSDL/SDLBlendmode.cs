@@ -79,7 +79,7 @@ namespace SharpSDL
         BLENDFACTOR_ONE_MINUS_DST_ALPHA = 10
     }
 
-    public unsafe partial class SDL_blendmode
+    public unsafe partial class SDLBlendmode
     {
         public partial struct __Internal
         {

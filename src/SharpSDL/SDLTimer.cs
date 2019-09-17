@@ -21,7 +21,7 @@ namespace SharpSDL
     public unsafe delegate uint TimerCallback(uint interval, global::System.IntPtr param);
 
     /// <summary>Definition of the timer ID type.</summary>
-    public unsafe partial class SDL_timer
+    public unsafe partial class SDLTimer
     {
         public partial struct __Internal
         {

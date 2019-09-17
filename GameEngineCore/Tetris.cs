@@ -99,7 +99,7 @@ namespace GameEngineCore
             //Fill(0, 0, ScreenWidth, ScreenHeight, ' ');
         }
 
-        protected override bool OnUpdate(double elapsedMs)
+        protected override bool OnUpdate(double elapsedSeconds)
         {
             if (_gameOver)
                 return false;
@@ -270,7 +270,7 @@ namespace GameEngineCore
                 _lines.Clear();
             }
 
-            return base.OnUpdate(elapsedMs);
+            return base.OnUpdate(elapsedSeconds);
         }
 
         private bool DoesPieceFit(int tetromino, int rotation, int posX, int posY)

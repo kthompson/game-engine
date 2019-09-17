@@ -580,7 +580,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_audio
+    public unsafe partial class SDLAudio
     {
         public partial struct __Internal
         {

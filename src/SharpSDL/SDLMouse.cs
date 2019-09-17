@@ -96,7 +96,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_mouse
+    public unsafe partial class SDLMouse
     {
         public partial struct __Internal
         {

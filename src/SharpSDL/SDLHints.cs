@@ -22,7 +22,7 @@ namespace SharpSDL
     [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(global::System.Runtime.InteropServices.CallingConvention.Cdecl)]
     public unsafe delegate void HintCallback(global::System.IntPtr userdata, [MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string oldValue, [MarshalAs(UnmanagedType.LPStr)] string newValue);
 
-    public unsafe partial class SDL_hints
+    public unsafe partial class SDLHints
     {
         public partial struct __Internal
         {

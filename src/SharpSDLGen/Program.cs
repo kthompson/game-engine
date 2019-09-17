@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CppSharp.AST.Extensions;
 using CppSharp.Generators;
 
 namespace SharpSDLGen
@@ -28,11 +29,26 @@ namespace SharpSDLGen
         //    }
         //}
 
-        private class RenameFilePass : GeneratorOutputPass
+        private class RenameFilePass : TranslationUnitPass
         {
-            public override void VisitGeneratorOutput(GeneratorOutput output)
+            public override bool VisitTranslationUnit(TranslationUnit unit)
             {
+                return base.VisitTranslationUnit(unit);
             }
+
+            //public override void VisitGeneratorOutput(GeneratorOutput output)
+            //{
+            //    if (output.TranslationUnit.FileNameWithoutExtension == "SDL_events")
+            //    {
+            //        //output.Outputs.ForEach(opt =>
+            //        //{
+            //        //    opt.RootBlock.Blocks.ForEach(blk =>
+            //        //    {
+            //        //        //blk.Kind
+            //        //    });
+            //        //});
+            //    }
+            //}
         }
 
         public void Setup(Driver driver)
@@ -58,10 +74,11 @@ namespace SharpSDLGen
             driver.Context.TranslationUnitPasses.RemovePrefix("SDLK_");
             driver.Context.TranslationUnitPasses.RemovePrefix("KMOD_");
             driver.Context.TranslationUnitPasses.RemovePrefix("LOG_CATEGORY_");
-            driver.Context.TranslationUnitPasses.RenameDeclsCase(RenameTargets.Class, RenameCasePattern.UpperCamelCase);
-            driver.Context.TranslationUnitPasses.RenameDeclsCase(RenameTargets.Class, RenameCasePattern.UpperCamelCase);
+            //driver.Context.TranslationUnitPasses.RenameDeclsCase(RenameTargets.Any, RenameCasePattern.UpperCamelCase);
 
-            driver.Context.GeneratorOutputPasses.AddPass(new RenameFilePass());
+            //driver.Context.TranslationUnitPasses.AddPass(new FunctionToInstanceMethodPass());
+
+            //driver.Context.GeneratorOutputPasses.AddPass(new RenameFilePass());
 
             driver.Options.GenerateName = unit =>
                 Regex.Replace(unit.FileNameWithoutExtension, "_[a-z]", m => m.Value[1].ToString().ToUpper());
@@ -94,11 +111,22 @@ namespace SharpSDLGen
             ctx.IgnoreEnumWithMatchingItem("SDL_ENOMEM");
             ctx.IgnoreFunctionWithName("SDL_Error");
 
+            //ctx.SetFunctionParameterUsage("SDL_PollEvent", 1, ParameterUsage.Out);
+            var pollEvent = ctx.FindFunction("SDL_PollEvent").First();
+
+            var eventParam = pollEvent.Parameters[0];
+            eventParam.Usage = ParameterUsage.Out;
+            //eventParam.Kind = ParameterKind.IndirectReturnType;
+
             ctx.IgnoreClassWithName("Windowsio");
 
-            ctx.SetFunctionParameterUsage("SDL_PollEvent", 1, ParameterUsage.Out);
+            //var typeDefs = ctx.TranslationUnits.SelectMany(tu => tu.Typedefs).ToList();
 
-            //ctx.SetMethodParameterUsage();
+            //var kmType = ctx.FindTypedef("SDL_Keymod").First();
+            //var keysym = ctx.FindClass("SDL_Keysym").First();
+            //var modField = keysym.Fields.Find(f => f.Name == "mod");
+            //modField.QualifiedType = new QualifiedType(new TypedefType(kmType));
+            //ctx.SetClassAsValueType();
         }
 
         public void Postprocess(Driver driver, ASTContext ctx)
@@ -113,6 +141,27 @@ namespace SharpSDLGen
             ctx.SetClassBindName("assert_data", "AssertData");
             ctx.SetNameOfEnumWithName("eventaction", "EventAction");
             ctx.SetNameOfEnumWithName("LOG_CATEGORY", "LogCategory");
+
+            var workItems = ctx.TranslationUnits.Where(unit => unit.FileName.StartsWith("SDL_")).ToList();
+            foreach (var translationUnit in workItems)
+            {
+                var newTu = new TranslationUnit()
+                {
+                    Macros = translationUnit.Macros,
+                    Access = translationUnit.Access,
+                    Module = translationUnit.Module,
+                    IsSystemHeader = translationUnit.IsSystemHeader,
+                    IsInline = translationUnit.IsInline,
+                    Declarations = translationUnit.Declarations,
+                    TypeReferences = translationUnit.TypeReferences,
+                    Anonymous = translationUnit.Anonymous,
+                    IsExternCContext = translationUnit.IsExternCContext,
+                    IsAnonymous = translationUnit.IsAnonymous,
+                    FilePath = "SDL" + translationUnit.FileName.Substring(4, 1).ToUpper() + translationUnit.FileName.Substring(5),
+                };
+                ctx.TranslationUnits.Remove(translationUnit);
+                ctx.TranslationUnits.Add(newTu);
+            }
 
             //var pollEvent = ctx.FindFunction("SDL_PollEvent").First();
         }

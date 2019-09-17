@@ -10,7 +10,7 @@ using System.Security;
 
 namespace SharpSDL
 {
-    public unsafe partial class SDL_clipboard
+    public unsafe partial class SDLClipboard
     {
         public partial struct __Internal
         {

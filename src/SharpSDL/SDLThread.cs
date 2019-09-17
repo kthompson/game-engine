@@ -80,7 +80,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_thread
+    public unsafe partial class SDLThread
     {
         public partial struct __Internal
         {

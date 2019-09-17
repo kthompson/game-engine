@@ -80,7 +80,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_sensor
+    public unsafe partial class SDLSensor
     {
         public partial struct __Internal
         {

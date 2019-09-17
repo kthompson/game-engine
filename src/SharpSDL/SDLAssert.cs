@@ -226,7 +226,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_assert
+    public unsafe partial class SDLAssert
     {
         public partial struct __Internal
         {

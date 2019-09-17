@@ -18,40 +18,40 @@ namespace SharpSDL
         /// <summary>User-requested quit</summary>
         QUIT = 256,
         /// <summary>
-        /// <para>The application is being terminated by the OS</para>
-        /// <para>Called on iOS in applicationWillTerminate()</para>
-        /// <para>Called on Android in onDestroy()</para>
-        /// </summary>
+/// <para>The application is being terminated by the OS</para>
+/// <para>Called on iOS in applicationWillTerminate()</para>
+/// <para>Called on Android in onDestroy()</para>
+/// </summary>
         APP_TERMINATING = 257,
         /// <summary>
-        /// <para>The application is low on memory, free memory if possible.</para>
-        /// <para>Called on iOS in applicationDidReceiveMemoryWarning()</para>
-        /// <para>Called on Android in onLowMemory()</para>
-        /// </summary>
+/// <para>The application is low on memory, free memory if possible.</para>
+/// <para>Called on iOS in applicationDidReceiveMemoryWarning()</para>
+/// <para>Called on Android in onLowMemory()</para>
+/// </summary>
         APP_LOWMEMORY = 258,
         /// <summary>
-        /// <para>The application is about to enter the background</para>
-        /// <para>Called on iOS in applicationWillResignActive()</para>
-        /// <para>Called on Android in onPause()</para>
-        /// </summary>
+/// <para>The application is about to enter the background</para>
+/// <para>Called on iOS in applicationWillResignActive()</para>
+/// <para>Called on Android in onPause()</para>
+/// </summary>
         APP_WILLENTERBACKGROUND = 259,
         /// <summary>
-        /// <para>The application did enter the background and may not get CPU for some time</para>
-        /// <para>Called on iOS in applicationDidEnterBackground()</para>
-        /// <para>Called on Android in onPause()</para>
-        /// </summary>
+/// <para>The application did enter the background and may not get CPU for some time</para>
+/// <para>Called on iOS in applicationDidEnterBackground()</para>
+/// <para>Called on Android in onPause()</para>
+/// </summary>
         APP_DIDENTERBACKGROUND = 260,
         /// <summary>
-        /// <para>The application is about to enter the foreground</para>
-        /// <para>Called on iOS in applicationWillEnterForeground()</para>
-        /// <para>Called on Android in onResume()</para>
-        /// </summary>
+/// <para>The application is about to enter the foreground</para>
+/// <para>Called on iOS in applicationWillEnterForeground()</para>
+/// <para>Called on Android in onResume()</para>
+/// </summary>
         APP_WILLENTERFOREGROUND = 261,
         /// <summary>
-        /// <para>The application is now interactive</para>
-        /// <para>Called on iOS in applicationDidBecomeActive()</para>
-        /// <para>Called on Android in onResume()</para>
-        /// </summary>
+/// <para>The application is now interactive</para>
+/// <para>Called on iOS in applicationDidBecomeActive()</para>
+/// <para>Called on Android in onResume()</para>
+/// </summary>
         APP_DIDENTERFOREGROUND = 262,
         /// <summary>Display state change</summary>
         DISPLAYEVENT = 336,
@@ -68,9 +68,9 @@ namespace SharpSDL
         /// <summary>Keyboard text input</summary>
         TEXTINPUT = 771,
         /// <summary>
-        /// <para>Keymap changed due to a system event such as an</para>
-        /// <para>input language or keyboard layout change.</para>
-        /// </summary>
+/// <para>Keymap changed due to a system event such as an</para>
+/// <para>input language or keyboard layout change.</para>
+/// </summary>
         KEYMAPCHANGED = 772,
         /// <summary>Mouse moved</summary>
         MOUSEMOTION = 1024,
@@ -133,9 +133,9 @@ namespace SharpSDL
         /// <summary>The device has been reset and all textures need to be recreated</summary>
         RENDER_DEVICE_RESET = 8193,
         /// <summary>
-        /// <para>Events ::SDL_USEREVENT through ::SDL_LASTEVENT are for your use,</para>
-        /// <para>and should be allocated with SDL_RegisterEvents()</para>
-        /// </summary>
+/// <para>Events ::SDL_USEREVENT through ::SDL_LASTEVENT are for your use,</para>
+/// <para>and should be allocated with SDL_RegisterEvents()</para>
+/// </summary>
         USEREVENT = 32768,
         /// <summary>This last event is only for bounding internal arrays</summary>
         LASTEVENT = 65535
@@ -185,7 +185,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.SysWMmsg.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.SysWMmsg.__Internal));
-            *(global::SharpSDL.SysWMmsg.__Internal*)ret = native;
+            *(global::SharpSDL.SysWMmsg.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -218,7 +218,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_CommonEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_CommonEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -243,7 +243,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.CommonEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.CommonEvent.__Internal));
-            *(global::SharpSDL.CommonEvent.__Internal*)ret = native;
+            *(global::SharpSDL.CommonEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -273,7 +273,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.CommonEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.CommonEvent.__Internal*)__Instance) = *((global::SharpSDL.CommonEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.CommonEvent.__Internal*) __Instance) = *((global::SharpSDL.CommonEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -296,7 +296,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.CommonEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.CommonEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -309,7 +309,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.CommonEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.CommonEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -351,7 +351,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_DisplayEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_DisplayEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -376,7 +376,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.DisplayEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.DisplayEvent.__Internal));
-            *(global::SharpSDL.DisplayEvent.__Internal*)ret = native;
+            *(global::SharpSDL.DisplayEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -406,7 +406,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.DisplayEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.DisplayEvent.__Internal*)__Instance) = *((global::SharpSDL.DisplayEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.DisplayEvent.__Internal*) __Instance) = *((global::SharpSDL.DisplayEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -429,7 +429,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -442,7 +442,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -455,7 +455,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->display;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->display;
             }
 
             set
@@ -468,7 +468,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->@event;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->@event;
             }
 
             set
@@ -481,7 +481,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -494,7 +494,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -507,7 +507,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->padding3;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->padding3;
             }
 
             set
@@ -520,7 +520,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DisplayEvent.__Internal*)__Instance)->data1;
+                return ((global::SharpSDL.DisplayEvent.__Internal*) __Instance)->data1;
             }
 
             set
@@ -565,7 +565,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_WindowEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_WindowEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -590,7 +590,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.WindowEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.WindowEvent.__Internal));
-            *(global::SharpSDL.WindowEvent.__Internal*)ret = native;
+            *(global::SharpSDL.WindowEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -620,7 +620,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.WindowEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.WindowEvent.__Internal*)__Instance) = *((global::SharpSDL.WindowEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.WindowEvent.__Internal*) __Instance) = *((global::SharpSDL.WindowEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -643,7 +643,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -656,7 +656,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -669,7 +669,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -682,7 +682,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->@event;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->@event;
             }
 
             set
@@ -695,7 +695,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -708,7 +708,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -721,7 +721,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->padding3;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->padding3;
             }
 
             set
@@ -734,7 +734,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->data1;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->data1;
             }
 
             set
@@ -747,7 +747,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.WindowEvent.__Internal*)__Instance)->data2;
+                return ((global::SharpSDL.WindowEvent.__Internal*) __Instance)->data2;
             }
 
             set
@@ -789,7 +789,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_KeyboardEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_KeyboardEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -814,7 +814,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.KeyboardEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.KeyboardEvent.__Internal));
-            *(global::SharpSDL.KeyboardEvent.__Internal*)ret = native;
+            *(global::SharpSDL.KeyboardEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -844,7 +844,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.KeyboardEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.KeyboardEvent.__Internal*)__Instance) = *((global::SharpSDL.KeyboardEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.KeyboardEvent.__Internal*) __Instance) = *((global::SharpSDL.KeyboardEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -867,7 +867,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -880,7 +880,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -893,7 +893,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -906,7 +906,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->state;
+                return ((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->state;
             }
 
             set
@@ -919,7 +919,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->repeat;
+                return ((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->repeat;
             }
 
             set
@@ -932,7 +932,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -945,7 +945,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->padding3;
+                return ((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->padding3;
             }
 
             set
@@ -958,14 +958,14 @@ namespace SharpSDL
         {
             get
             {
-                return global::SharpSDL.Keysym.__CreateInstance(new global::System.IntPtr(&((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->keysym));
+                return global::SharpSDL.Keysym.__CreateInstance(new global::System.IntPtr(&((global::SharpSDL.KeyboardEvent.__Internal*) __Instance)->keysym));
             }
 
             set
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->keysym = *(global::SharpSDL.Keysym.__Internal*)value.__Instance;
+                ((global::SharpSDL.KeyboardEvent.__Internal*)__Instance)->keysym = *(global::SharpSDL.Keysym.__Internal*) value.__Instance;
             }
         }
     }
@@ -996,7 +996,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_TextEditingEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_TextEditingEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -1021,7 +1021,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.TextEditingEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.TextEditingEvent.__Internal));
-            *(global::SharpSDL.TextEditingEvent.__Internal*)ret = native;
+            *(global::SharpSDL.TextEditingEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -1051,7 +1051,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.TextEditingEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.TextEditingEvent.__Internal*)__Instance) = *((global::SharpSDL.TextEditingEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.TextEditingEvent.__Internal*) __Instance) = *((global::SharpSDL.TextEditingEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -1074,7 +1074,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextEditingEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.TextEditingEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -1087,7 +1087,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextEditingEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.TextEditingEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -1100,7 +1100,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextEditingEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.TextEditingEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -1114,11 +1114,11 @@ namespace SharpSDL
             get
             {
                 sbyte[] __value = null;
-                if (((global::SharpSDL.TextEditingEvent.__Internal*)__Instance)->text != null)
+                if (((global::SharpSDL.TextEditingEvent.__Internal*) __Instance)->text != null)
                 {
                     __value = new sbyte[32];
                     for (int i = 0; i < 32; i++)
-                        __value[i] = ((global::SharpSDL.TextEditingEvent.__Internal*)__Instance)->text[i];
+                        __value[i] = ((global::SharpSDL.TextEditingEvent.__Internal*) __Instance)->text[i];
                 }
                 return __value;
             }
@@ -1137,7 +1137,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextEditingEvent.__Internal*)__Instance)->start;
+                return ((global::SharpSDL.TextEditingEvent.__Internal*) __Instance)->start;
             }
 
             set
@@ -1150,7 +1150,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextEditingEvent.__Internal*)__Instance)->length;
+                return ((global::SharpSDL.TextEditingEvent.__Internal*) __Instance)->length;
             }
 
             set
@@ -1180,7 +1180,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_TextInputEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_TextInputEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -1205,7 +1205,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.TextInputEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.TextInputEvent.__Internal));
-            *(global::SharpSDL.TextInputEvent.__Internal*)ret = native;
+            *(global::SharpSDL.TextInputEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -1235,7 +1235,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.TextInputEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.TextInputEvent.__Internal*)__Instance) = *((global::SharpSDL.TextInputEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.TextInputEvent.__Internal*) __Instance) = *((global::SharpSDL.TextInputEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -1258,7 +1258,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextInputEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.TextInputEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -1271,7 +1271,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextInputEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.TextInputEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -1284,7 +1284,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TextInputEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.TextInputEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -1298,11 +1298,11 @@ namespace SharpSDL
             get
             {
                 sbyte[] __value = null;
-                if (((global::SharpSDL.TextInputEvent.__Internal*)__Instance)->text != null)
+                if (((global::SharpSDL.TextInputEvent.__Internal*) __Instance)->text != null)
                 {
                     __value = new sbyte[32];
                     for (int i = 0; i < 32; i++)
-                        __value[i] = ((global::SharpSDL.TextInputEvent.__Internal*)__Instance)->text[i];
+                        __value[i] = ((global::SharpSDL.TextInputEvent.__Internal*) __Instance)->text[i];
                 }
                 return __value;
             }
@@ -1353,7 +1353,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_MouseMotionEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_MouseMotionEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -1378,7 +1378,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.MouseMotionEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MouseMotionEvent.__Internal));
-            *(global::SharpSDL.MouseMotionEvent.__Internal*)ret = native;
+            *(global::SharpSDL.MouseMotionEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -1408,7 +1408,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MouseMotionEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance) = *((global::SharpSDL.MouseMotionEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance) = *((global::SharpSDL.MouseMotionEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -1431,7 +1431,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -1444,7 +1444,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -1457,7 +1457,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -1470,7 +1470,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -1483,7 +1483,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->state;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->state;
             }
 
             set
@@ -1496,7 +1496,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->x;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->x;
             }
 
             set
@@ -1509,7 +1509,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->y;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->y;
             }
 
             set
@@ -1522,7 +1522,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->xrel;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->xrel;
             }
 
             set
@@ -1535,7 +1535,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseMotionEvent.__Internal*)__Instance)->yrel;
+                return ((global::SharpSDL.MouseMotionEvent.__Internal*) __Instance)->yrel;
             }
 
             set
@@ -1583,7 +1583,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_MouseButtonEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_MouseButtonEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -1608,7 +1608,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.MouseButtonEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MouseButtonEvent.__Internal));
-            *(global::SharpSDL.MouseButtonEvent.__Internal*)ret = native;
+            *(global::SharpSDL.MouseButtonEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -1638,7 +1638,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MouseButtonEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance) = *((global::SharpSDL.MouseButtonEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance) = *((global::SharpSDL.MouseButtonEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -1661,7 +1661,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -1674,7 +1674,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -1687,7 +1687,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -1700,7 +1700,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -1713,7 +1713,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->button;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->button;
             }
 
             set
@@ -1726,7 +1726,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->state;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->state;
             }
 
             set
@@ -1739,7 +1739,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->clicks;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->clicks;
             }
 
             set
@@ -1752,7 +1752,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -1765,7 +1765,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->x;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->x;
             }
 
             set
@@ -1778,7 +1778,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseButtonEvent.__Internal*)__Instance)->y;
+                return ((global::SharpSDL.MouseButtonEvent.__Internal*) __Instance)->y;
             }
 
             set
@@ -1817,7 +1817,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_MouseWheelEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_MouseWheelEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -1842,7 +1842,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.MouseWheelEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MouseWheelEvent.__Internal));
-            *(global::SharpSDL.MouseWheelEvent.__Internal*)ret = native;
+            *(global::SharpSDL.MouseWheelEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -1872,7 +1872,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MouseWheelEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance) = *((global::SharpSDL.MouseWheelEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance) = *((global::SharpSDL.MouseWheelEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -1895,7 +1895,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -1908,7 +1908,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -1921,7 +1921,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -1934,7 +1934,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -1947,7 +1947,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance)->x;
+                return ((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance)->x;
             }
 
             set
@@ -1960,7 +1960,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance)->y;
+                return ((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance)->y;
             }
 
             set
@@ -1973,7 +1973,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MouseWheelEvent.__Internal*)__Instance)->direction;
+                return ((global::SharpSDL.MouseWheelEvent.__Internal*) __Instance)->direction;
             }
 
             set
@@ -2018,7 +2018,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_JoyAxisEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_JoyAxisEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -2043,7 +2043,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.JoyAxisEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyAxisEvent.__Internal));
-            *(global::SharpSDL.JoyAxisEvent.__Internal*)ret = native;
+            *(global::SharpSDL.JoyAxisEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -2073,7 +2073,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyAxisEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance) = *((global::SharpSDL.JoyAxisEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance) = *((global::SharpSDL.JoyAxisEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -2096,7 +2096,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -2109,7 +2109,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -2122,7 +2122,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -2135,7 +2135,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->axis;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->axis;
             }
 
             set
@@ -2148,7 +2148,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -2161,7 +2161,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -2174,7 +2174,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->padding3;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->padding3;
             }
 
             set
@@ -2187,7 +2187,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->value;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->value;
             }
 
             set
@@ -2200,7 +2200,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyAxisEvent.__Internal*)__Instance)->padding4;
+                return ((global::SharpSDL.JoyAxisEvent.__Internal*) __Instance)->padding4;
             }
 
             set
@@ -2245,7 +2245,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_JoyBallEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_JoyBallEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -2270,7 +2270,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.JoyBallEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyBallEvent.__Internal));
-            *(global::SharpSDL.JoyBallEvent.__Internal*)ret = native;
+            *(global::SharpSDL.JoyBallEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -2300,7 +2300,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyBallEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.JoyBallEvent.__Internal*)__Instance) = *((global::SharpSDL.JoyBallEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.JoyBallEvent.__Internal*) __Instance) = *((global::SharpSDL.JoyBallEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -2323,7 +2323,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -2336,7 +2336,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -2349,7 +2349,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -2362,7 +2362,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->ball;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->ball;
             }
 
             set
@@ -2375,7 +2375,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -2388,7 +2388,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -2401,7 +2401,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->padding3;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->padding3;
             }
 
             set
@@ -2414,7 +2414,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->xrel;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->xrel;
             }
 
             set
@@ -2427,7 +2427,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyBallEvent.__Internal*)__Instance)->yrel;
+                return ((global::SharpSDL.JoyBallEvent.__Internal*) __Instance)->yrel;
             }
 
             set
@@ -2466,7 +2466,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_JoyHatEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_JoyHatEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -2491,7 +2491,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.JoyHatEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyHatEvent.__Internal));
-            *(global::SharpSDL.JoyHatEvent.__Internal*)ret = native;
+            *(global::SharpSDL.JoyHatEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -2521,7 +2521,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyHatEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.JoyHatEvent.__Internal*)__Instance) = *((global::SharpSDL.JoyHatEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.JoyHatEvent.__Internal*) __Instance) = *((global::SharpSDL.JoyHatEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -2544,7 +2544,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyHatEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.JoyHatEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -2557,7 +2557,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyHatEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.JoyHatEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -2570,7 +2570,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyHatEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.JoyHatEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -2583,7 +2583,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyHatEvent.__Internal*)__Instance)->hat;
+                return ((global::SharpSDL.JoyHatEvent.__Internal*) __Instance)->hat;
             }
 
             set
@@ -2596,7 +2596,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyHatEvent.__Internal*)__Instance)->value;
+                return ((global::SharpSDL.JoyHatEvent.__Internal*) __Instance)->value;
             }
 
             set
@@ -2609,7 +2609,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyHatEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.JoyHatEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -2622,7 +2622,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyHatEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.JoyHatEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -2661,7 +2661,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_JoyButtonEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_JoyButtonEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -2686,7 +2686,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.JoyButtonEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyButtonEvent.__Internal));
-            *(global::SharpSDL.JoyButtonEvent.__Internal*)ret = native;
+            *(global::SharpSDL.JoyButtonEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -2716,7 +2716,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyButtonEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance) = *((global::SharpSDL.JoyButtonEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance) = *((global::SharpSDL.JoyButtonEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -2739,7 +2739,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -2752,7 +2752,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -2765,7 +2765,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -2778,7 +2778,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance)->button;
+                return ((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance)->button;
             }
 
             set
@@ -2791,7 +2791,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance)->state;
+                return ((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance)->state;
             }
 
             set
@@ -2804,7 +2804,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -2817,7 +2817,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyButtonEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.JoyButtonEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -2844,7 +2844,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_JoyDeviceEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_JoyDeviceEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -2869,7 +2869,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.JoyDeviceEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyDeviceEvent.__Internal));
-            *(global::SharpSDL.JoyDeviceEvent.__Internal*)ret = native;
+            *(global::SharpSDL.JoyDeviceEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -2899,7 +2899,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.JoyDeviceEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.JoyDeviceEvent.__Internal*)__Instance) = *((global::SharpSDL.JoyDeviceEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.JoyDeviceEvent.__Internal*) __Instance) = *((global::SharpSDL.JoyDeviceEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -2922,7 +2922,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyDeviceEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.JoyDeviceEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -2935,7 +2935,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyDeviceEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.JoyDeviceEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -2948,7 +2948,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.JoyDeviceEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.JoyDeviceEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -2993,7 +2993,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_ControllerAxisEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_ControllerAxisEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -3018,7 +3018,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.ControllerAxisEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.ControllerAxisEvent.__Internal));
-            *(global::SharpSDL.ControllerAxisEvent.__Internal*)ret = native;
+            *(global::SharpSDL.ControllerAxisEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -3048,7 +3048,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.ControllerAxisEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance) = *((global::SharpSDL.ControllerAxisEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance) = *((global::SharpSDL.ControllerAxisEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -3071,7 +3071,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -3084,7 +3084,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -3097,7 +3097,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -3110,7 +3110,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->axis;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->axis;
             }
 
             set
@@ -3123,7 +3123,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -3136,7 +3136,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -3149,7 +3149,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->padding3;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->padding3;
             }
 
             set
@@ -3162,7 +3162,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->value;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->value;
             }
 
             set
@@ -3175,7 +3175,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerAxisEvent.__Internal*)__Instance)->padding4;
+                return ((global::SharpSDL.ControllerAxisEvent.__Internal*) __Instance)->padding4;
             }
 
             set
@@ -3214,7 +3214,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_ControllerButtonEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_ControllerButtonEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -3239,7 +3239,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.ControllerButtonEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.ControllerButtonEvent.__Internal));
-            *(global::SharpSDL.ControllerButtonEvent.__Internal*)ret = native;
+            *(global::SharpSDL.ControllerButtonEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -3269,7 +3269,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.ControllerButtonEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance) = *((global::SharpSDL.ControllerButtonEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance) = *((global::SharpSDL.ControllerButtonEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -3292,7 +3292,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -3305,7 +3305,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -3318,7 +3318,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -3331,7 +3331,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance)->button;
+                return ((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance)->button;
             }
 
             set
@@ -3344,7 +3344,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance)->state;
+                return ((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance)->state;
             }
 
             set
@@ -3357,7 +3357,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -3370,7 +3370,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerButtonEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.ControllerButtonEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -3397,7 +3397,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_ControllerDeviceEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_ControllerDeviceEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -3422,7 +3422,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.ControllerDeviceEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.ControllerDeviceEvent.__Internal));
-            *(global::SharpSDL.ControllerDeviceEvent.__Internal*)ret = native;
+            *(global::SharpSDL.ControllerDeviceEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -3452,7 +3452,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.ControllerDeviceEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.ControllerDeviceEvent.__Internal*)__Instance) = *((global::SharpSDL.ControllerDeviceEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.ControllerDeviceEvent.__Internal*) __Instance) = *((global::SharpSDL.ControllerDeviceEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -3475,7 +3475,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerDeviceEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.ControllerDeviceEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -3488,7 +3488,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerDeviceEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.ControllerDeviceEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -3501,7 +3501,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.ControllerDeviceEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.ControllerDeviceEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -3540,7 +3540,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_AudioDeviceEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_AudioDeviceEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -3565,7 +3565,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.AudioDeviceEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.AudioDeviceEvent.__Internal));
-            *(global::SharpSDL.AudioDeviceEvent.__Internal*)ret = native;
+            *(global::SharpSDL.AudioDeviceEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -3595,7 +3595,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.AudioDeviceEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance) = *((global::SharpSDL.AudioDeviceEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance) = *((global::SharpSDL.AudioDeviceEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -3618,7 +3618,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -3631,7 +3631,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -3644,7 +3644,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -3657,7 +3657,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance)->iscapture;
+                return ((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance)->iscapture;
             }
 
             set
@@ -3670,7 +3670,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance)->padding1;
+                return ((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance)->padding1;
             }
 
             set
@@ -3683,7 +3683,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance)->padding2;
+                return ((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance)->padding2;
             }
 
             set
@@ -3696,7 +3696,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.AudioDeviceEvent.__Internal*)__Instance)->padding3;
+                return ((global::SharpSDL.AudioDeviceEvent.__Internal*) __Instance)->padding3;
             }
 
             set
@@ -3741,7 +3741,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_TouchFingerEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_TouchFingerEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -3766,7 +3766,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.TouchFingerEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.TouchFingerEvent.__Internal));
-            *(global::SharpSDL.TouchFingerEvent.__Internal*)ret = native;
+            *(global::SharpSDL.TouchFingerEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -3796,7 +3796,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.TouchFingerEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance) = *((global::SharpSDL.TouchFingerEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance) = *((global::SharpSDL.TouchFingerEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -3819,7 +3819,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -3832,7 +3832,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -3845,7 +3845,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->touchId;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->touchId;
             }
 
             set
@@ -3858,7 +3858,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->fingerId;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->fingerId;
             }
 
             set
@@ -3871,7 +3871,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->x;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->x;
             }
 
             set
@@ -3884,7 +3884,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->y;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->y;
             }
 
             set
@@ -3897,7 +3897,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->dx;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->dx;
             }
 
             set
@@ -3910,7 +3910,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->dy;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->dy;
             }
 
             set
@@ -3923,7 +3923,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.TouchFingerEvent.__Internal*)__Instance)->pressure;
+                return ((global::SharpSDL.TouchFingerEvent.__Internal*) __Instance)->pressure;
             }
 
             set
@@ -3968,7 +3968,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_MultiGestureEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_MultiGestureEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -3993,7 +3993,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.MultiGestureEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MultiGestureEvent.__Internal));
-            *(global::SharpSDL.MultiGestureEvent.__Internal*)ret = native;
+            *(global::SharpSDL.MultiGestureEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -4023,7 +4023,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.MultiGestureEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance) = *((global::SharpSDL.MultiGestureEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance) = *((global::SharpSDL.MultiGestureEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -4046,7 +4046,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -4059,7 +4059,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -4072,7 +4072,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->touchId;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->touchId;
             }
 
             set
@@ -4085,7 +4085,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->dTheta;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->dTheta;
             }
 
             set
@@ -4098,7 +4098,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->dDist;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->dDist;
             }
 
             set
@@ -4111,7 +4111,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->x;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->x;
             }
 
             set
@@ -4124,7 +4124,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->y;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->y;
             }
 
             set
@@ -4137,7 +4137,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->numFingers;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->numFingers;
             }
 
             set
@@ -4150,7 +4150,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.MultiGestureEvent.__Internal*)__Instance)->padding;
+                return ((global::SharpSDL.MultiGestureEvent.__Internal*) __Instance)->padding;
             }
 
             set
@@ -4192,7 +4192,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_DollarGestureEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_DollarGestureEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -4217,7 +4217,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.DollarGestureEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.DollarGestureEvent.__Internal));
-            *(global::SharpSDL.DollarGestureEvent.__Internal*)ret = native;
+            *(global::SharpSDL.DollarGestureEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -4247,7 +4247,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.DollarGestureEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance) = *((global::SharpSDL.DollarGestureEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance) = *((global::SharpSDL.DollarGestureEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -4270,7 +4270,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -4283,7 +4283,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -4296,7 +4296,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->touchId;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->touchId;
             }
 
             set
@@ -4309,7 +4309,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->gestureId;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->gestureId;
             }
 
             set
@@ -4322,7 +4322,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->numFingers;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->numFingers;
             }
 
             set
@@ -4335,7 +4335,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->error;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->error;
             }
 
             set
@@ -4348,7 +4348,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->x;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->x;
             }
 
             set
@@ -4361,7 +4361,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DollarGestureEvent.__Internal*)__Instance)->y;
+                return ((global::SharpSDL.DollarGestureEvent.__Internal*) __Instance)->y;
             }
 
             set
@@ -4372,10 +4372,10 @@ namespace SharpSDL
     }
 
     /// <summary>
-    /// <para>An event used to request a file open by the system (event.drop.*)</para>
-    /// <para>This event is enabled by default, you can disable it with SDL_EventState().</para>
-    /// </summary>
-    /// <remarks>If this event is enabled, you must free the filename in the event.</remarks>
+/// <para>An event used to request a file open by the system (event.drop.*)</para>
+/// <para>This event is enabled by default, you can disable it with SDL_EventState().</para>
+/// </summary>
+/// <remarks>If this event is enabled, you must free the filename in the event.</remarks>
     public unsafe partial class DropEvent : IDisposable
     {
         [StructLayout(LayoutKind.Explicit, Size = 24)]
@@ -4395,7 +4395,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_DropEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_DropEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -4420,7 +4420,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.DropEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.DropEvent.__Internal));
-            *(global::SharpSDL.DropEvent.__Internal*)ret = native;
+            *(global::SharpSDL.DropEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -4450,7 +4450,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.DropEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.DropEvent.__Internal*)__Instance) = *((global::SharpSDL.DropEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.DropEvent.__Internal*) __Instance) = *((global::SharpSDL.DropEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -4473,7 +4473,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DropEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.DropEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -4486,7 +4486,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DropEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.DropEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -4499,12 +4499,12 @@ namespace SharpSDL
         {
             get
             {
-                return (sbyte*)((global::SharpSDL.DropEvent.__Internal*)__Instance)->file;
+                return (sbyte*) ((global::SharpSDL.DropEvent.__Internal*) __Instance)->file;
             }
 
             set
             {
-                ((global::SharpSDL.DropEvent.__Internal*)__Instance)->file = (global::System.IntPtr)value;
+                ((global::SharpSDL.DropEvent.__Internal*)__Instance)->file = (global::System.IntPtr) value;
             }
         }
 
@@ -4512,7 +4512,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.DropEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.DropEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -4542,7 +4542,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_SensorEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_SensorEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -4567,7 +4567,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.SensorEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.SensorEvent.__Internal));
-            *(global::SharpSDL.SensorEvent.__Internal*)ret = native;
+            *(global::SharpSDL.SensorEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -4597,7 +4597,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.SensorEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.SensorEvent.__Internal*)__Instance) = *((global::SharpSDL.SensorEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.SensorEvent.__Internal*) __Instance) = *((global::SharpSDL.SensorEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -4620,7 +4620,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.SensorEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.SensorEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -4633,7 +4633,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.SensorEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.SensorEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -4646,7 +4646,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.SensorEvent.__Internal*)__Instance)->which;
+                return ((global::SharpSDL.SensorEvent.__Internal*) __Instance)->which;
             }
 
             set
@@ -4660,11 +4660,11 @@ namespace SharpSDL
             get
             {
                 float[] __value = null;
-                if (((global::SharpSDL.SensorEvent.__Internal*)__Instance)->data != null)
+                if (((global::SharpSDL.SensorEvent.__Internal*) __Instance)->data != null)
                 {
                     __value = new float[6];
                     for (int i = 0; i < 6; i++)
-                        __value[i] = ((global::SharpSDL.SensorEvent.__Internal*)__Instance)->data[i];
+                        __value[i] = ((global::SharpSDL.SensorEvent.__Internal*) __Instance)->data[i];
                 }
                 return __value;
             }
@@ -4694,7 +4694,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_QuitEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_QuitEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -4719,7 +4719,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.QuitEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.QuitEvent.__Internal));
-            *(global::SharpSDL.QuitEvent.__Internal*)ret = native;
+            *(global::SharpSDL.QuitEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -4749,7 +4749,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.QuitEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.QuitEvent.__Internal*)__Instance) = *((global::SharpSDL.QuitEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.QuitEvent.__Internal*) __Instance) = *((global::SharpSDL.QuitEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -4772,7 +4772,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.QuitEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.QuitEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -4785,7 +4785,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.QuitEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.QuitEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -4809,7 +4809,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_OSEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_OSEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -4834,7 +4834,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.OSEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.OSEvent.__Internal));
-            *(global::SharpSDL.OSEvent.__Internal*)ret = native;
+            *(global::SharpSDL.OSEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -4864,7 +4864,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.OSEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.OSEvent.__Internal*)__Instance) = *((global::SharpSDL.OSEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.OSEvent.__Internal*) __Instance) = *((global::SharpSDL.OSEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -4887,7 +4887,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.OSEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.OSEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -4900,7 +4900,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.OSEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.OSEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -4936,7 +4936,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_UserEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_UserEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -4961,7 +4961,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.UserEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.UserEvent.__Internal));
-            *(global::SharpSDL.UserEvent.__Internal*)ret = native;
+            *(global::SharpSDL.UserEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -4991,7 +4991,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.UserEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.UserEvent.__Internal*)__Instance) = *((global::SharpSDL.UserEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.UserEvent.__Internal*) __Instance) = *((global::SharpSDL.UserEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -5014,7 +5014,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.UserEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.UserEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -5027,7 +5027,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.UserEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.UserEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -5040,7 +5040,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.UserEvent.__Internal*)__Instance)->windowID;
+                return ((global::SharpSDL.UserEvent.__Internal*) __Instance)->windowID;
             }
 
             set
@@ -5053,7 +5053,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.UserEvent.__Internal*)__Instance)->code;
+                return ((global::SharpSDL.UserEvent.__Internal*) __Instance)->code;
             }
 
             set
@@ -5066,12 +5066,12 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.UserEvent.__Internal*)__Instance)->data1;
+                return ((global::SharpSDL.UserEvent.__Internal*) __Instance)->data1;
             }
 
             set
             {
-                ((global::SharpSDL.UserEvent.__Internal*)__Instance)->data1 = (global::System.IntPtr)value;
+                ((global::SharpSDL.UserEvent.__Internal*)__Instance)->data1 = (global::System.IntPtr) value;
             }
         }
 
@@ -5079,21 +5079,21 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.UserEvent.__Internal*)__Instance)->data2;
+                return ((global::SharpSDL.UserEvent.__Internal*) __Instance)->data2;
             }
 
             set
             {
-                ((global::SharpSDL.UserEvent.__Internal*)__Instance)->data2 = (global::System.IntPtr)value;
+                ((global::SharpSDL.UserEvent.__Internal*)__Instance)->data2 = (global::System.IntPtr) value;
             }
         }
     }
 
     /// <summary>
-    /// <para>A video driver dependent system event (event.syswm.*)</para>
-    /// <para>This event is disabled by default, you can enable it with SDL_EventState()</para>
-    /// </summary>
-    /// <remarks>If you want to use this event, you should include SDL_syswm.h.</remarks>
+/// <para>A video driver dependent system event (event.syswm.*)</para>
+/// <para>This event is disabled by default, you can enable it with SDL_EventState()</para>
+/// </summary>
+/// <remarks>If you want to use this event, you should include SDL_syswm.h.</remarks>
     public unsafe partial class SysWMEvent : IDisposable
     {
         [StructLayout(LayoutKind.Explicit, Size = 16)]
@@ -5110,7 +5110,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_SysWMEvent@@QEAA@AEBU0@@Z")]
+                EntryPoint="??0SDL_SysWMEvent@@QEAA@AEBU0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -5135,7 +5135,7 @@ namespace SharpSDL
         private static void* __CopyValue(global::SharpSDL.SysWMEvent.__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(global::SharpSDL.SysWMEvent.__Internal));
-            *(global::SharpSDL.SysWMEvent.__Internal*)ret = native;
+            *(global::SharpSDL.SysWMEvent.__Internal*) ret = native;
             return ret.ToPointer();
         }
 
@@ -5165,7 +5165,7 @@ namespace SharpSDL
             __Instance = Marshal.AllocHGlobal(sizeof(global::SharpSDL.SysWMEvent.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::SharpSDL.SysWMEvent.__Internal*)__Instance) = *((global::SharpSDL.SysWMEvent.__Internal*)_0.__Instance);
+            *((global::SharpSDL.SysWMEvent.__Internal*) __Instance) = *((global::SharpSDL.SysWMEvent.__Internal*) _0.__Instance);
         }
 
         public void Dispose()
@@ -5188,7 +5188,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.SysWMEvent.__Internal*)__Instance)->type;
+                return ((global::SharpSDL.SysWMEvent.__Internal*) __Instance)->type;
             }
 
             set
@@ -5201,7 +5201,7 @@ namespace SharpSDL
         {
             get
             {
-                return ((global::SharpSDL.SysWMEvent.__Internal*)__Instance)->timestamp;
+                return ((global::SharpSDL.SysWMEvent.__Internal*) __Instance)->timestamp;
             }
 
             set
@@ -5215,10 +5215,10 @@ namespace SharpSDL
             get
             {
                 global::SharpSDL.SysWMmsg __result0;
-                if (((global::SharpSDL.SysWMEvent.__Internal*)__Instance)->msg == IntPtr.Zero) __result0 = null;
-                else if (global::SharpSDL.SysWMmsg.NativeToManagedMap.ContainsKey(((global::SharpSDL.SysWMEvent.__Internal*)__Instance)->msg))
-                    __result0 = (global::SharpSDL.SysWMmsg)global::SharpSDL.SysWMmsg.NativeToManagedMap[((global::SharpSDL.SysWMEvent.__Internal*)__Instance)->msg];
-                else __result0 = global::SharpSDL.SysWMmsg.__CreateInstance(((global::SharpSDL.SysWMEvent.__Internal*)__Instance)->msg);
+                if (((global::SharpSDL.SysWMEvent.__Internal*) __Instance)->msg == IntPtr.Zero) __result0 = null;
+                else if (global::SharpSDL.SysWMmsg.NativeToManagedMap.ContainsKey(((global::SharpSDL.SysWMEvent.__Internal*) __Instance)->msg))
+                    __result0 = (global::SharpSDL.SysWMmsg) global::SharpSDL.SysWMmsg.NativeToManagedMap[((global::SharpSDL.SysWMEvent.__Internal*) __Instance)->msg];
+                else __result0 = global::SharpSDL.SysWMmsg.__CreateInstance(((global::SharpSDL.SysWMEvent.__Internal*) __Instance)->msg);
                 return __result0;
             }
 
@@ -5321,7 +5321,7 @@ namespace SharpSDL
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "??0SDL_Event@@QEAA@AEBT0@@Z")]
+                EntryPoint="??0SDL_Event@@QEAA@AEBT0@@Z")]
             internal static extern global::System.IntPtr cctor(global::System.IntPtr __instance, global::System.IntPtr _0);
         }
 
@@ -5346,7 +5346,7 @@ namespace SharpSDL
 
         private Event(void* native, bool skipVTables = false) : this()
         {
-            __instance = *(global::SharpSDL.Event.__Internal*)native;
+            __instance = *(global::SharpSDL.Event.__Internal*) native;
         }
 
         public Event(global::SharpSDL.Event _0)
@@ -5384,7 +5384,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.common = *(global::SharpSDL.CommonEvent.__Internal*)value.__Instance;
+                __instance.common = *(global::SharpSDL.CommonEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5399,7 +5399,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.display = *(global::SharpSDL.DisplayEvent.__Internal*)value.__Instance;
+                __instance.display = *(global::SharpSDL.DisplayEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5414,7 +5414,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.window = *(global::SharpSDL.WindowEvent.__Internal*)value.__Instance;
+                __instance.window = *(global::SharpSDL.WindowEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5429,7 +5429,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.key = *(global::SharpSDL.KeyboardEvent.__Internal*)value.__Instance;
+                __instance.key = *(global::SharpSDL.KeyboardEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5444,7 +5444,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.edit = *(global::SharpSDL.TextEditingEvent.__Internal*)value.__Instance;
+                __instance.edit = *(global::SharpSDL.TextEditingEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5459,7 +5459,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.text = *(global::SharpSDL.TextInputEvent.__Internal*)value.__Instance;
+                __instance.text = *(global::SharpSDL.TextInputEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5474,7 +5474,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.motion = *(global::SharpSDL.MouseMotionEvent.__Internal*)value.__Instance;
+                __instance.motion = *(global::SharpSDL.MouseMotionEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5489,7 +5489,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.button = *(global::SharpSDL.MouseButtonEvent.__Internal*)value.__Instance;
+                __instance.button = *(global::SharpSDL.MouseButtonEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5504,7 +5504,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.wheel = *(global::SharpSDL.MouseWheelEvent.__Internal*)value.__Instance;
+                __instance.wheel = *(global::SharpSDL.MouseWheelEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5519,7 +5519,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.jaxis = *(global::SharpSDL.JoyAxisEvent.__Internal*)value.__Instance;
+                __instance.jaxis = *(global::SharpSDL.JoyAxisEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5534,7 +5534,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.jball = *(global::SharpSDL.JoyBallEvent.__Internal*)value.__Instance;
+                __instance.jball = *(global::SharpSDL.JoyBallEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5549,7 +5549,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.jhat = *(global::SharpSDL.JoyHatEvent.__Internal*)value.__Instance;
+                __instance.jhat = *(global::SharpSDL.JoyHatEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5564,7 +5564,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.jbutton = *(global::SharpSDL.JoyButtonEvent.__Internal*)value.__Instance;
+                __instance.jbutton = *(global::SharpSDL.JoyButtonEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5579,7 +5579,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.jdevice = *(global::SharpSDL.JoyDeviceEvent.__Internal*)value.__Instance;
+                __instance.jdevice = *(global::SharpSDL.JoyDeviceEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5594,7 +5594,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.caxis = *(global::SharpSDL.ControllerAxisEvent.__Internal*)value.__Instance;
+                __instance.caxis = *(global::SharpSDL.ControllerAxisEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5609,7 +5609,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.cbutton = *(global::SharpSDL.ControllerButtonEvent.__Internal*)value.__Instance;
+                __instance.cbutton = *(global::SharpSDL.ControllerButtonEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5624,7 +5624,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.cdevice = *(global::SharpSDL.ControllerDeviceEvent.__Internal*)value.__Instance;
+                __instance.cdevice = *(global::SharpSDL.ControllerDeviceEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5639,7 +5639,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.adevice = *(global::SharpSDL.AudioDeviceEvent.__Internal*)value.__Instance;
+                __instance.adevice = *(global::SharpSDL.AudioDeviceEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5654,7 +5654,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.sensor = *(global::SharpSDL.SensorEvent.__Internal*)value.__Instance;
+                __instance.sensor = *(global::SharpSDL.SensorEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5669,7 +5669,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.quit = *(global::SharpSDL.QuitEvent.__Internal*)value.__Instance;
+                __instance.quit = *(global::SharpSDL.QuitEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5684,7 +5684,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.user = *(global::SharpSDL.UserEvent.__Internal*)value.__Instance;
+                __instance.user = *(global::SharpSDL.UserEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5699,7 +5699,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.syswm = *(global::SharpSDL.SysWMEvent.__Internal*)value.__Instance;
+                __instance.syswm = *(global::SharpSDL.SysWMEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5714,7 +5714,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.tfinger = *(global::SharpSDL.TouchFingerEvent.__Internal*)value.__Instance;
+                __instance.tfinger = *(global::SharpSDL.TouchFingerEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5729,7 +5729,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.mgesture = *(global::SharpSDL.MultiGestureEvent.__Internal*)value.__Instance;
+                __instance.mgesture = *(global::SharpSDL.MultiGestureEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5744,7 +5744,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.dgesture = *(global::SharpSDL.DollarGestureEvent.__Internal*)value.__Instance;
+                __instance.dgesture = *(global::SharpSDL.DollarGestureEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5759,7 +5759,7 @@ namespace SharpSDL
             {
                 if (ReferenceEquals(value, null))
                     throw new global::System.ArgumentNullException("value", "Cannot be null because it is passed by value.");
-                __instance.drop = *(global::SharpSDL.DropEvent.__Internal*)value.__Instance;
+                __instance.drop = *(global::SharpSDL.DropEvent.__Internal*) value.__Instance;
             }
         }
 
@@ -5794,106 +5794,106 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_events
+    public unsafe partial class SDLEvents
     {
         public partial struct __Internal
         {
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_PumpEvents")]
+                EntryPoint="SDL_PumpEvents")]
             internal static extern void PumpEvents();
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_PeepEvents")]
+                EntryPoint="SDL_PeepEvents")]
             internal static extern int PeepEvents(global::System.IntPtr events, int numevents, global::SharpSDL.Eventaction action, uint minType, uint maxType);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_FlushEvent")]
+                EntryPoint="SDL_FlushEvent")]
             internal static extern void FlushEvent(uint type);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_FlushEvents")]
+                EntryPoint="SDL_FlushEvents")]
             internal static extern void FlushEvents(uint minType, uint maxType);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_PollEvent")]
+                EntryPoint="SDL_PollEvent")]
             internal static extern int PollEvent(global::System.IntPtr @event);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_WaitEvent")]
+                EntryPoint="SDL_WaitEvent")]
             internal static extern int WaitEvent(global::System.IntPtr @event);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_WaitEventTimeout")]
+                EntryPoint="SDL_WaitEventTimeout")]
             internal static extern int WaitEventTimeout(global::System.IntPtr @event, int timeout);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_PushEvent")]
+                EntryPoint="SDL_PushEvent")]
             internal static extern int PushEvent(global::System.IntPtr @event);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_SetEventFilter")]
+                EntryPoint="SDL_SetEventFilter")]
             internal static extern void SetEventFilter(global::System.IntPtr filter, global::System.IntPtr userdata);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_AddEventWatch")]
+                EntryPoint="SDL_AddEventWatch")]
             internal static extern void AddEventWatch(global::System.IntPtr filter, global::System.IntPtr userdata);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_DelEventWatch")]
+                EntryPoint="SDL_DelEventWatch")]
             internal static extern void DelEventWatch(global::System.IntPtr filter, global::System.IntPtr userdata);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_FilterEvents")]
+                EntryPoint="SDL_FilterEvents")]
             internal static extern void FilterEvents(global::System.IntPtr filter, global::System.IntPtr userdata);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_EventState")]
+                EntryPoint="SDL_EventState")]
             internal static extern byte EventState(uint type, int state);
 
             [SuppressUnmanagedCodeSecurity]
             [DllImport("SDL2", CallingConvention = global::System.Runtime.InteropServices.CallingConvention.Cdecl,
-                EntryPoint = "SDL_RegisterEvents")]
+                EntryPoint="SDL_RegisterEvents")]
             internal static extern uint RegisterEvents(int numevents);
         }
 
         /// <summary>Pumps the event loop, gathering events from the input devices.</summary>
-        /// <remarks>
-        /// <para>This function updates the event queue and internal input device state.</para>
-        /// <para>This should only be run in the thread that sets the video mode.</para>
-        /// </remarks>
+/// <remarks>
+/// <para>This function updates the event queue and internal input device state.</para>
+/// <para>This should only be run in the thread that sets the video mode.</para>
+/// </remarks>
         public static void PumpEvents()
         {
             __Internal.PumpEvents();
         }
 
         /// <summary>Checks the event queue for messages and optionally returns them.</summary>
-        /// <returns>
-        /// <para>The number of events actually stored, or -1 if there was an error.</para>
-        /// <para>This function is thread-safe.</para>
-        /// </returns>
-        /// <remarks>
-        /// <para>Ifis ::SDL_ADDEVENT, up toevents will be added to</para>
-        /// <para>the back of the event queue.</para>
-        /// <para>Ifis ::SDL_PEEKEVENT, up toevents at the front</para>
-        /// <para>of the event queue, within the specified minimum and maximum type,</para>
-        /// <para>will be returned and will not be removed from the queue.</para>
-        /// <para>Ifis ::SDL_GETEVENT, up toevents at the front</para>
-        /// <para>of the event queue, within the specified minimum and maximum type,</para>
-        /// <para>will be returned and will be removed from the queue.</para>
-        /// </remarks>
+/// <returns>
+/// <para>The number of events actually stored, or -1 if there was an error.</para>
+/// <para>This function is thread-safe.</para>
+/// </returns>
+/// <remarks>
+/// <para>Ifis ::SDL_ADDEVENT, up toevents will be added to</para>
+/// <para>the back of the event queue.</para>
+/// <para>Ifis ::SDL_PEEKEVENT, up toevents at the front</para>
+/// <para>of the event queue, within the specified minimum and maximum type,</para>
+/// <para>will be returned and will not be removed from the queue.</para>
+/// <para>Ifis ::SDL_GETEVENT, up toevents at the front</para>
+/// <para>of the event queue, within the specified minimum and maximum type,</para>
+/// <para>will be returned and will be removed from the queue.</para>
+/// </remarks>
         public static int PeepEvents(global::SharpSDL.Event events, int numevents, global::SharpSDL.Eventaction action, uint minType, uint maxType)
         {
             var ____arg0 = events.__Instance;
@@ -5903,11 +5903,11 @@ namespace SharpSDL
         }
 
         /// <summary>
-        /// <para>This function clears events from the event queue</para>
-        /// <para>This function only affects currently queued events. If you want to make</para>
-        /// <para>sure that all pending OS events are flushed, you can call SDL_PumpEvents()</para>
-        /// <para>on the main thread immediately before the flush call.</para>
-        /// </summary>
+/// <para>This function clears events from the event queue</para>
+/// <para>This function only affects currently queued events. If you want to make</para>
+/// <para>sure that all pending OS events are flushed, you can call SDL_PumpEvents()</para>
+/// <para>on the main thread immediately before the flush call.</para>
+/// </summary>
         public static void FlushEvent(uint type)
         {
             __Internal.FlushEvent(type);
@@ -5919,11 +5919,11 @@ namespace SharpSDL
         }
 
         /// <summary>Polls for currently pending events.</summary>
-        /// <param name="event">
-        /// <para>If not NULL, the next event is removed from the queue and</para>
-        /// <para>stored in that area.</para>
-        /// </param>
-        /// <returns>1 if there are any pending events, or 0 if there are none available.</returns>
+/// <param name="event">
+/// <para>If not NULL, the next event is removed from the queue and</para>
+/// <para>stored in that area.</para>
+/// </param>
+/// <returns>1 if there are any pending events, or 0 if there are none available.</returns>
         public static int PollEvent(out global::SharpSDL.Event @event)
         {
             @event = new global::SharpSDL.Event();
@@ -5934,11 +5934,11 @@ namespace SharpSDL
         }
 
         /// <summary>Waits indefinitely for the next available event.</summary>
-        /// <param name="event">
-        /// <para>If not NULL, the next event is removed from the queue and</para>
-        /// <para>stored in that area.</para>
-        /// </param>
-        /// <returns>1, or 0 if there was an error while waiting for events.</returns>
+/// <param name="event">
+/// <para>If not NULL, the next event is removed from the queue and</para>
+/// <para>stored in that area.</para>
+/// </param>
+/// <returns>1, or 0 if there was an error while waiting for events.</returns>
         public static int WaitEvent(global::SharpSDL.Event @event)
         {
             var ____arg0 = @event.__Instance;
@@ -5948,15 +5948,15 @@ namespace SharpSDL
         }
 
         /// <summary>
-        /// <para>Waits until the specified timeout (in milliseconds) for the next</para>
-        /// <para>available event.</para>
-        /// </summary>
-        /// <param name="event">
-        /// <para>If not NULL, the next event is removed from the queue and</para>
-        /// <para>stored in that area.</para>
-        /// </param>
-        /// <param name="timeout">The timeout (in milliseconds) to wait for next event.</param>
-        /// <returns>1, or 0 if there was an error while waiting for events.</returns>
+/// <para>Waits until the specified timeout (in milliseconds) for the next</para>
+/// <para>available event.</para>
+/// </summary>
+/// <param name="event">
+/// <para>If not NULL, the next event is removed from the queue and</para>
+/// <para>stored in that area.</para>
+/// </param>
+/// <param name="timeout">The timeout (in milliseconds) to wait for next event.</param>
+/// <returns>1, or 0 if there was an error while waiting for events.</returns>
         public static int WaitEventTimeout(global::SharpSDL.Event @event, int timeout)
         {
             var ____arg0 = @event.__Instance;
@@ -5966,10 +5966,10 @@ namespace SharpSDL
         }
 
         /// <summary>Add an event to the event queue.</summary>
-        /// <returns>
-        /// <para>1 on success, 0 if the event was filtered, or -1 if the event queue</para>
-        /// <para>was full or there was some other error.</para>
-        /// </returns>
+/// <returns>
+/// <para>1 on success, 0 if the event was filtered, or -1 if the event queue</para>
+/// <para>was full or there was some other error.</para>
+/// </returns>
         public static int PushEvent(global::SharpSDL.Event @event)
         {
             var ____arg0 = @event.__Instance;
@@ -5979,24 +5979,24 @@ namespace SharpSDL
         }
 
         /// <summary>
-        /// <para>Sets up a filter to process all events before they change internal state and</para>
-        /// <para>are posted to the internal event queue.</para>
-        /// </summary>
-        /// <remarks>
-        /// <para>The filter is prototyped as:</para>
-        /// <para>If the filter returns 1, then the event will be added to the internal queue.</para>
-        /// <para>If it returns 0, then the event will be dropped from the queue, but the</para>
-        /// <para>internal state will still be updated.  This allows selective filtering of</para>
-        /// <para>dynamically arriving events.</para>
-        /// <para>Be very careful of what you do in the event filter function, as</para>
-        /// <para>it may run in a different thread!</para>
-        /// <para>There is one caveat when dealing with the ::SDL_QuitEvent event type.  The</para>
-        /// <para>event filter is only called when the window manager desires to close the</para>
-        /// <para>application window.  If the event filter returns 1, then the window will</para>
-        /// <para>be closed, otherwise the window will remain open if possible.</para>
-        /// <para>If the quit event is generated by an interrupt signal, it will bypass the</para>
-        /// <para>internal queue and be delivered to the application at the next event poll.</para>
-        /// </remarks>
+/// <para>Sets up a filter to process all events before they change internal state and</para>
+/// <para>are posted to the internal event queue.</para>
+/// </summary>
+/// <remarks>
+/// <para>The filter is prototyped as:</para>
+/// <para>If the filter returns 1, then the event will be added to the internal queue.</para>
+/// <para>If it returns 0, then the event will be dropped from the queue, but the</para>
+/// <para>internal state will still be updated.  This allows selective filtering of</para>
+/// <para>dynamically arriving events.</para>
+/// <para>Be very careful of what you do in the event filter function, as</para>
+/// <para>it may run in a different thread!</para>
+/// <para>There is one caveat when dealing with the ::SDL_QuitEvent event type.  The</para>
+/// <para>event filter is only called when the window manager desires to close the</para>
+/// <para>application window.  If the event filter returns 1, then the window will</para>
+/// <para>be closed, otherwise the window will remain open if possible.</para>
+/// <para>If the quit event is generated by an interrupt signal, it will bypass the</para>
+/// <para>internal queue and be delivered to the application at the next event poll.</para>
+/// </remarks>
         public static void SetEventFilter(global::SharpSDL.EventFilter filter, global::System.IntPtr userdata)
         {
             var __arg0 = filter == null ? global::System.IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(filter);
@@ -6018,9 +6018,9 @@ namespace SharpSDL
         }
 
         /// <summary>
-        /// <para>Run the filter function on the current event queue, removing any</para>
-        /// <para>events for which the filter returns 0.</para>
-        /// </summary>
+/// <para>Run the filter function on the current event queue, removing any</para>
+/// <para>events for which the filter returns 0.</para>
+/// </summary>
         public static void FilterEvents(global::SharpSDL.EventFilter filter, global::System.IntPtr userdata)
         {
             var __arg0 = filter == null ? global::System.IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(filter);
@@ -6028,14 +6028,14 @@ namespace SharpSDL
         }
 
         /// <summary>
-        /// <para>This function allows you to set the state of processing certain events.</para>
-        /// <para>- Ifis set to ::SDL_IGNORE, that event will be automatically</para>
-        /// <para>dropped from the event queue and will not be filtered.</para>
-        /// <para>- Ifis set to ::SDL_ENABLE, that event will be processed</para>
-        /// <para>normally.</para>
-        /// <para>- Ifis set to ::SDL_QUERY, SDL_EventState() will return the</para>
-        /// <para>current processing state of the specified event.</para>
-        /// </summary>
+/// <para>This function allows you to set the state of processing certain events.</para>
+/// <para>- Ifis set to ::SDL_IGNORE, that event will be automatically</para>
+/// <para>dropped from the event queue and will not be filtered.</para>
+/// <para>- Ifis set to ::SDL_ENABLE, that event will be processed</para>
+/// <para>normally.</para>
+/// <para>- Ifis set to ::SDL_QUERY, SDL_EventState() will return the</para>
+/// <para>current processing state of the specified event.</para>
+/// </summary>
         public static byte EventState(uint type, int state)
         {
             var __ret = __Internal.EventState(type, state);
@@ -6043,13 +6043,13 @@ namespace SharpSDL
         }
 
         /// <summary>
-        /// <para>This function allocates a set of user-defined events, and returns</para>
-        /// <para>the beginning event number for that set of events.</para>
-        /// </summary>
-        /// <remarks>
-        /// <para>If there aren't enough user-defined events left, this function</para>
-        /// <para>returns (Uint32)-1</para>
-        /// </remarks>
+/// <para>This function allocates a set of user-defined events, and returns</para>
+/// <para>the beginning event number for that set of events.</para>
+/// </summary>
+/// <remarks>
+/// <para>If there aren't enough user-defined events left, this function</para>
+/// <para>returns (Uint32)-1</para>
+/// </remarks>
         public static uint RegisterEvents(int numevents)
         {
             var __ret = __Internal.RegisterEvents(numevents);

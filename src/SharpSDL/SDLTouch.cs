@@ -164,7 +164,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_touch
+    public unsafe partial class SDLTouch
     {
         public partial struct __Internal
         {

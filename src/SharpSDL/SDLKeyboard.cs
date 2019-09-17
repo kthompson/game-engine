@@ -158,7 +158,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_keyboard
+    public unsafe partial class SDLKeyboard
     {
         public partial struct __Internal
         {

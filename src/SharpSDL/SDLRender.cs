@@ -352,7 +352,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_render
+    public unsafe partial class SDLRender
     {
         public partial struct __Internal
         {

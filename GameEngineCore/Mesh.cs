@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 
 namespace GameEngineCore
 {
@@ -22,7 +23,7 @@ namespace GameEngineCore
         {
             using (var reader = File.OpenText(fileName))
             {
-                var vertices = new List<Vector3>();
+                var vertices = new List<Vector4>();
                 var faces = new List<Triangle>();
                 while (true)
                 {
@@ -42,7 +43,7 @@ namespace GameEngineCore
                                 float.Parse(parts[1]),
                                 float.Parse(parts[2]),
                                 float.Parse(parts[3])
-                            ));
+                            ).ToVector4());
                             break;
 
                         case "f": // triangles

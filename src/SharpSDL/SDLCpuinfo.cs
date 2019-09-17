@@ -10,7 +10,7 @@ using System.Security;
 
 namespace SharpSDL
 {
-    public unsafe partial class SDL_cpuinfo
+    public unsafe partial class SDLCpuinfo
     {
         public partial struct __Internal
         {

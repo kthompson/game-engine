@@ -10,7 +10,7 @@ using System.Security;
 
 namespace SharpSDL
 {
-    public unsafe partial class SDL_filesystem
+    public unsafe partial class SDLFilesystem
     {
         public partial struct __Internal
         {

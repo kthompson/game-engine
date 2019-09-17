@@ -211,7 +211,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_joystick
+    public unsafe partial class SDLJoystick
     {
         public partial struct __Internal
         {

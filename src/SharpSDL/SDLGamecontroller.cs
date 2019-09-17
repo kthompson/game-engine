@@ -433,7 +433,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_gamecontroller
+    public unsafe partial class SDLGamecontroller
     {
         public partial struct __Internal
         {

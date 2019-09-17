@@ -10,7 +10,7 @@ using System.Security;
 
 namespace SharpSDL
 {
-    public unsafe partial class SDL_gesture
+    public unsafe partial class SDLGesture
     {
         public partial struct __Internal
         {

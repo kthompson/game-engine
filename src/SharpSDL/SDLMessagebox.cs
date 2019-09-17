@@ -625,7 +625,7 @@ namespace SharpSDL
         }
     }
 
-    public unsafe partial class SDL_messagebox
+    public unsafe partial class SDLMessagebox
     {
         public partial struct __Internal
         {
