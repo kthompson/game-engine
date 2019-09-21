@@ -7,9 +7,6 @@
 
   <ItemGroup>
     <None Remove="axis.obj" />
-    <None Remove="ship_concept.obj" />
-    <None Remove="tinker.obj" />
-    <None Remove="zx.obj" />
   </ItemGroup>
 
   <ItemGroup>

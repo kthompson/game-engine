@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using SharpSDL;
 
 namespace GameEngineCore
@@ -42,9 +41,37 @@ namespace GameEngineCore
         private Vector3 OffsetOfView = new Vector3(1, 1, 0);
 
         private float theta;
+        private Plane _planeScreenTop;
+        private Plane _planeScreenBottom;
+        private Plane _planeScreenLeft;
+        private Plane _planeScreenRight;
+        private bool _debugClipping = true;
 
         public Demo3d() : base(512, 480, 4, 4)
         {
+            _planeScreenTop = new Plane()
+            {
+                Point = new Vector3(),
+                Normal = Vector3.UnitY
+            };
+
+            _planeScreenLeft = new Plane()
+            {
+                Point = new Vector3(),
+                Normal = Vector3.UnitX
+            };
+
+            _planeScreenRight = new Plane()
+            {
+                Point = new Vector3(ScreenWidth - 1, 0, 0),
+                Normal = -Vector3.UnitX
+            };
+
+            _planeScreenBottom = new Plane()
+            {
+                Point = new Vector3(0, ScreenHeight - 1.0f, 0),
+                Normal = -Vector3.UnitY
+            };
         }
 
         protected override void OnInitialize()
@@ -58,7 +85,7 @@ namespace GameEngineCore
             var fov = 90f; // degrees
             var aspectRatio = (float)this.ScreenHeight / (float)this.ScreenWidth;
 
-            float fovRad = 1f / (float)Math.Tan(fov * 0.5f / 180.0f * Math.PI);
+            var fovRad = 1f / MathF.Tan(fov * 0.5f / 180.0f * MathF.PI);
 
             _projection = MatrixHelpers.CreateProjectionMatrix(fovRad, aspectRatio, near, far);
             // this doesn't work for some reason
@@ -67,8 +94,6 @@ namespace GameEngineCore
 
         protected override bool OnUpdate(double elapsedSeconds)
         {
-            ClearScreen(GetColor(Color.Cyan));
-
             if (IsKeyPressed(ScanCode.SDL_SCANCODE_Q))
             {
                 return false;
@@ -131,15 +156,15 @@ namespace GameEngineCore
             // build world matrix
             var world = _rotateZ * _rotateX * translation;
 
-            var up = Vector3.UnitY;
+            var up = -Vector3.UnitY;
             var target = Vector3.UnitZ;
 
             _lookDirection = Vector3.Transform(target, Matrix4x4.CreateRotationY(_yaw));
 
             target = _camera + _lookDirection;
 
+            //var view = Matrix4x4.CreateLookAt(_camera, target, up);
             var view = Matrix4x4.CreateLookAt(_camera, target, up);
-            //var view = MatrixHelpers.CreateLookAt(_camera, target, up);
 
             var trianglesToDraw = new List<Triangle>();
 
@@ -172,6 +197,8 @@ namespace GameEngineCore
                 // how aligned are light direction and triangle surface normal?
                 var dp = (float)Math.Max(0.1, Vector3.Dot(normalizedNormal, normalizedLightDirection));
 
+                transformedTriangle.Color = GetColor(dp);
+
                 // Convert from World Space to View(camera) space
                 var triangleViewed = MultiplyMatrixVector(transformedTriangle, view);
 
@@ -182,15 +209,12 @@ namespace GameEngineCore
                     Normal = Vector3.UnitZ,
                 };
 
-                //var clippedTriangles = nearPlane.ClipAgainst(triangleViewed);
-                //foreach (var clippedTriangle in clippedTriangles)
+                var clippedTriangles = nearPlane.ClipAgainst(triangleViewed, _debugClipping);
+                foreach (var clippedTriangle in clippedTriangles)
                 {
                     // project from 3d to 2d screen coordinates
                     // scale into view, divide by w to get into cartesian space 'W'
-                      var triangleProjected = MultiplyMatrixVectorW(triangleViewed, _projection);
-                    //var triangleProjected = MultiplyMatrixVectorW(clippedTriangle, _projection);
-
-                    triangleProjected.Color = GetColor(dp);
+                    var triangleProjected = MultiplyMatrixVectorW(clippedTriangle, _projection);
 
                     triangleProjected.A += OffsetOfView;
                     triangleProjected.B += OffsetOfView;
@@ -216,20 +240,63 @@ namespace GameEngineCore
                 return z1 > z2 ? -1 : z2 > z1 ? 1 : 0;
             });
 
-            foreach (var triangle in trianglesToDraw)
+            ClearScreen(GetColor(Color.Cyan));
+
+            foreach (var triToRaster in trianglesToDraw)
             {
-                FillTriangle(
-                    (int)triangle.A.X, (int)triangle.A.Y,
-                    (int)triangle.B.X, (int)triangle.B.Y,
-                    (int)triangle.C.X, (int)triangle.C.Y,
-                    triangle.Color
-                );
-                DrawTriangle(
-                    (int)triangle.A.X, (int)triangle.A.Y,
-                    (int)triangle.B.X, (int)triangle.B.Y,
-                    (int)triangle.C.X, (int)triangle.C.Y,
-                    color: GetColor(Color.Black)
-                );
+                // clip triangles against screen edges
+
+                var listTriangles = new List<Triangle>();
+
+                // add initial triangle
+                listTriangles.Add(triToRaster);
+                var newTriangles = 1;
+
+                //TODO: clipping on right and bottom are not working
+                for (int p = 0; p < 2; p++)
+                {
+                    while (newTriangles > 0)
+                    {
+                        var test = listTriangles[0];
+                        listTriangles.RemoveAt(0);
+                        newTriangles--;
+
+                        switch (p)
+                        {
+                            case 0:
+                                listTriangles.AddRange(_planeScreenTop.ClipAgainst(test, _debugClipping));
+                                break;
+                            case 1:
+                                listTriangles.AddRange(_planeScreenLeft.ClipAgainst(test, _debugClipping));
+                                break;
+                            case 2:
+                                listTriangles.AddRange(_planeScreenRight.ClipAgainst(test, _debugClipping));
+                                break;
+                            case 3:
+                                listTriangles.AddRange(_planeScreenBottom.ClipAgainst(test, _debugClipping));
+                                break;
+                        }
+                    }
+
+                    newTriangles = listTriangles.Count;
+                }
+
+                foreach (var triangle in listTriangles)
+                {
+                    FillTriangle(
+                        (int)triangle.A.X, (int)triangle.A.Y,
+                        (int)triangle.B.X, (int)triangle.B.Y,
+                        (int)triangle.C.X, (int)triangle.C.Y,
+                        triangle.Color
+                    );
+                    DrawTriangle(
+                        (int)triangle.A.X, (int)triangle.A.Y,
+                        (int)triangle.B.X, (int)triangle.B.Y,
+                        (int)triangle.C.X, (int)triangle.C.Y,
+                        color: GetColor(Color.Black)
+                    );
+                    
+                }
             }
 
             return base.OnUpdate(elapsedSeconds);
@@ -241,7 +308,7 @@ namespace GameEngineCore
             var b = Vector4.Transform(i.B, m).NormalizeW();
             var c = Vector4.Transform(i.C, m).NormalizeW();
 
-            return new Triangle(a, b, c);
+            return new Triangle(a, b, c, i.Color);
         }
 
         private static Triangle MultiplyMatrixVector(Triangle i, Matrix4x4 m)
@@ -250,7 +317,7 @@ namespace GameEngineCore
             var b = Vector3.Transform(i.B, m);
             var c = Vector3.Transform(i.C, m);
 
-            return new Triangle(a, b, c);
+            return new Triangle(a, b, c, i.Color);
         }
     }
 }

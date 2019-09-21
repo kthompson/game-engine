@@ -1,11 +1,17 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\code\personal\game-engine" t="IncludeFlat">
+    <e p="C:\Users\Kevin\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Kevin\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_GameEngineCore.-2033914968.00" t="ExcludeRecursive" />
+    <e p="E:\code\GameEngineCore" t="IncludeFlat">
       <e p=".gitignore" t="Include" />
       <e p="CPPApp" t="IncludeRecursive">
+        <e p="CPPApp.cpp" t="Include" />
         <e p="CPPApp.vcxproj" t="IncludeRecursive" />
+        <e p="Debug" t="ExcludeRecursive" />
+        <e p="oldConsoleGameEngine.h" t="Include" />
       </e>
+      <e p="Debug" t="ExcludeRecursive" />
       <e p="GameEngineCore.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Solution Items" t="Include" />
@@ -13,6 +19,7 @@
         <e p="axis.obj" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Color.cs" t="Include" />
+        <e p="Colors.cs" t="Include" />
         <e p="ConsoleGameEngine.cs" t="Include" />
         <e p="Demo3d.cs" t="Include" />
         <e p="GameEngineCore.csproj" t="IncludeRecursive" />
@@ -30,9 +37,14 @@
         <e p="PixelType.cs" t="Include" />
         <e p="Plane.cs" t="Include" />
         <e p="Program.cs" t="Include" />
+        <e p="ship_concept.obj" t="Include" />
         <e p="Tetris.cs" t="Include" />
+        <e p="tinker.obj" t="Include" />
         <e p="Triangle.cs" t="Include" />
+        <e p="Vector3.cs" t="Include" />
+        <e p="Vector4.cs" t="Include" />
         <e p="VectorExtensions.cs" t="Include" />
+        <e p="zx.obj" t="Include" />
       </e>
       <e p="src\SharpSDL" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
@@ -48,6 +60,7 @@
         <e p="SDL2-symbols.cpp" t="Include" />
         <e p="SDL2.dll" t="Include" />
         <e p="SDLAssert.cs" t="Include" />
+        <e p="SDLatomic.cs" t="Include" />
         <e p="SDLAudio.cs" t="Include" />
         <e p="SDLBlendmode.cs" t="Include" />
         <e p="SDLClipboard.cs" t="Include" />
@@ -66,14 +79,17 @@
         <e p="SDLLog.cs" t="Include" />
         <e p="SDLMessagebox.cs" t="Include" />
         <e p="SDLMouse.cs" t="Include" />
+        <e p="SDLmutex.cs" t="Include" />
         <e p="SDLPixels.cs" t="Include" />
         <e p="SDLPlatform.cs" t="Include" />
         <e p="SDLPower.cs" t="Include" />
         <e p="SDLRect.cs" t="Include" />
         <e p="SDLRender.cs" t="Include" />
+        <e p="SDLrwops.cs" t="Include" />
         <e p="SDLScancode.cs" t="Include" />
         <e p="SDLSensor.cs" t="Include" />
         <e p="SDLShape.cs" t="Include" />
+        <e p="SDLstdinc.cs" t="Include" />
         <e p="SDLSurface.cs" t="Include" />
         <e p="SDLSystem.cs" t="Include" />
         <e p="SDLThread.cs" t="Include" />
@@ -98,7 +114,5 @@
         <e p="SharpSDLGen.csproj" t="IncludeRecursive" />
       </e>
     </e>
-    <e p="C:\Users\Kevin\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Kevin\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_GameEngineCore.1823247896.00" t="ExcludeRecursive" />
   </component>
 </project>

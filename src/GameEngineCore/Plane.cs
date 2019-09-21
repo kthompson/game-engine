@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Numerics;
 
 namespace GameEngineCore
 {
@@ -38,7 +37,7 @@ namespace GameEngineCore
             return intersection;
         }
 
-        public IEnumerable<Triangle> ClipAgainst(Triangle triangle)
+        public IEnumerable<Triangle> ClipAgainst(Triangle triangle, bool debug = false)
         {
             // make sure plane normal is normalized
             var planeNormal = Vector3.Normalize(Normal);
@@ -123,7 +122,7 @@ namespace GameEngineCore
 
                         yield return new Triangle
                         {
-                            Color = triangle.Color,
+                            Color = debug ? Colors.Blue : triangle.Color,
                             // keep the inside point
                             A = pointB,
 
@@ -179,7 +178,7 @@ namespace GameEngineCore
 
                         yield return new Triangle
                         {
-                            Color = triangle.Color,
+                            Color = debug ? Colors.Green : triangle.Color,
                             A = pointA,
                             B = pointB,
                             C = pointE
@@ -187,7 +186,7 @@ namespace GameEngineCore
 
                         yield return new Triangle
                         {
-                            Color = triangle.Color,
+                            Color = debug ? Colors.Red : triangle.Color,
                             A = pointB,
                             B = pointE,
                             C = pointD

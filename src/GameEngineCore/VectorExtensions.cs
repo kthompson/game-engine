@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http.Headers;
-using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 
 namespace GameEngineCore

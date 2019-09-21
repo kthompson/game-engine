@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace GameEngineCore
+﻿namespace GameEngineCore
 {
     internal struct Triangle
     {
