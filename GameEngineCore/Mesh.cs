@@ -23,7 +23,7 @@ namespace GameEngineCore
         {
             using (var reader = File.OpenText(fileName))
             {
-                var vertices = new List<Vector4>();
+                var vertices = new List<Vector3>();
                 var faces = new List<Triangle>();
                 while (true)
                 {
@@ -34,7 +34,7 @@ namespace GameEngineCore
                     if (line.Length == 0)
                         continue;
 
-                    var parts = line.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                    var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
                     switch (parts[0])
                     {
@@ -43,7 +43,7 @@ namespace GameEngineCore
                                 float.Parse(parts[1]),
                                 float.Parse(parts[2]),
                                 float.Parse(parts[3])
-                            ).ToVector4());
+                            ));
                             break;
 
                         case "f": // triangles

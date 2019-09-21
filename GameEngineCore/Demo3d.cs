@@ -39,7 +39,7 @@ namespace GameEngineCore
         private Vector3 _lookDirection = Vector3.UnitZ;
         private float _yaw = 0;
 
-        private Vector4 OffsetOfView = new Vector4(1, 1, 0, 0);
+        private Vector3 OffsetOfView = new Vector3(1, 1, 0);
 
         private float theta;
 
@@ -49,7 +49,8 @@ namespace GameEngineCore
 
         protected override void OnInitialize()
         {
-            _cube = Mesh.ReadFromFile("ship_concept.obj");
+            //_cube = Mesh.ReadFromFile("ship_concept.obj");
+            _cube = Mesh.ReadFromFile("axis.obj");
 
             // Projection matrix
             var near = 0.1f;
@@ -133,7 +134,7 @@ namespace GameEngineCore
             var up = Vector3.UnitY;
             var target = Vector3.UnitZ;
 
-            _lookDirection = target.ToVector4().Multiply(Matrix4x4.CreateRotationY(_yaw)).DropW();
+            _lookDirection = Vector3.Transform(target, Matrix4x4.CreateRotationY(_yaw));
 
             target = _camera + _lookDirection;
 
@@ -150,22 +151,21 @@ namespace GameEngineCore
                 var line1 = transformedTriangle.B - transformedTriangle.A;
                 var line2 = transformedTriangle.C - transformedTriangle.A;
 
-                var normal = Vector3.Cross(line1.DropW(), line2.DropW());
+                var normal = Vector3.Cross(line1, line2);
                 var normalizedNormal = Vector3.Normalize(normal);
 
                 // Get Vector from from A to the camera, and compare to normal
                 //
                 // We can use any point of the triangle because all points of
                 // the triangle are in the same plane
-                var cameraRay = transformedTriangle.A.DropW() - _camera;
+                var cameraRay = transformedTriangle.A - _camera;
 
                 // if dot is less than 0 then the vectors are either perpendicular or
                 // facing in the other direction so therefore are not visible
                 if (!(Vector3.Dot(normalizedNormal, cameraRay) < 0f)) continue;
 
                 // Illumination
-                var lightDirection = new Vector3(0, 0, -1);  // toward user
-
+                var lightDirection = new Vector3(0, 1.0f, -1);
                 var normalizedLightDirection = Vector3.Normalize(lightDirection);
 
                 // how aligned are light direction and triangle surface normal?
@@ -174,28 +174,35 @@ namespace GameEngineCore
                 // Convert from World Space to View(camera) space
                 var triangleViewed = MultiplyMatrixVector(transformedTriangle, view);
 
-                // project from 3d to 2d screen coordinates
-                var triangleProjected = MultiplyMatrixVector(triangleViewed, _projection);
+                // clip triangles in view space
+                var nearPlane = new Plane
+                {
+                    Point = Vector3.UnitZ / 10,
+                    Normal = Vector3.UnitZ,
+                };
 
-                // scale into view, divide by w to get into cartesian space
-                triangleProjected.A /= triangleProjected.A.W;
-                triangleProjected.B /= triangleProjected.B.W;
-                triangleProjected.C /= triangleProjected.C.W;
+                var clippedTriangles = nearPlane.ClipAgainst(triangleViewed);
+                foreach (var clippedTriangle in clippedTriangles)
+                {
+                    // project from 3d to 2d screen coordinates
+                    // scale into view, divide by w to get into cartesian space 'W'
+                    var triangleProjected = MultiplyMatrixVectorW(clippedTriangle, _projection);
 
-                triangleProjected.Color = GetColor(dp);
+                    triangleProjected.Color = GetColor(dp);
 
-                triangleProjected.A += OffsetOfView;
-                triangleProjected.B += OffsetOfView;
-                triangleProjected.C += OffsetOfView;
+                    triangleProjected.A += OffsetOfView;
+                    triangleProjected.B += OffsetOfView;
+                    triangleProjected.C += OffsetOfView;
 
-                triangleProjected.A.X *= 0.5f * ScreenWidth;
-                triangleProjected.A.Y *= 0.5f * ScreenHeight;
-                triangleProjected.B.X *= 0.5f * ScreenWidth;
-                triangleProjected.B.Y *= 0.5f * ScreenHeight;
-                triangleProjected.C.X *= 0.5f * ScreenWidth;
-                triangleProjected.C.Y *= 0.5f * ScreenHeight;
+                    triangleProjected.A.X *= 0.5f * ScreenWidth;
+                    triangleProjected.A.Y *= 0.5f * ScreenHeight;
+                    triangleProjected.B.X *= 0.5f * ScreenWidth;
+                    triangleProjected.B.Y *= 0.5f * ScreenHeight;
+                    triangleProjected.C.X *= 0.5f * ScreenWidth;
+                    triangleProjected.C.Y *= 0.5f * ScreenHeight;
 
-                trianglesToDraw.Add(triangleProjected);
+                    trianglesToDraw.Add(triangleProjected);
+                }
             }
 
             // sort triangles from back to front
@@ -226,11 +233,20 @@ namespace GameEngineCore
             return base.OnUpdate(elapsedSeconds);
         }
 
-        private Triangle MultiplyMatrixVector(Triangle i, Matrix4x4 m)
+        private static Triangle MultiplyMatrixVectorW(Triangle i, Matrix4x4 m)
         {
-            var a = i.A.Multiply(m);
-            var b = i.B.Multiply(m);
-            var c = i.C.Multiply(m);
+            var a = Vector4.Transform(i.A, m).NormalizeW();
+            var b = Vector4.Transform(i.B, m).NormalizeW();
+            var c = Vector4.Transform(i.C, m).NormalizeW();
+
+            return new Triangle(a, b, c);
+        }
+
+        private static Triangle MultiplyMatrixVector(Triangle i, Matrix4x4 m)
+        {
+            var a = Vector3.Transform(i.A, m);
+            var b = Vector3.Transform(i.B, m);
+            var c = Vector3.Transform(i.C, m);
 
             return new Triangle(a, b, c);
         }

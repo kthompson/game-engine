@@ -4,7 +4,7 @@ namespace GameEngineCore
 {
     internal struct Triangle
     {
-        public Triangle(Vector4 a, Vector4 b, Vector4 c, Vector4? color = null)
+        public Triangle(Vector3 a, Vector3 b, Vector3 c, Vector4? color = null)
         {
             A = a;
             B = b;
@@ -12,9 +12,9 @@ namespace GameEngineCore
             Color = color ?? new Vector4(0, 0, 0, 1);
         }
 
-        public Vector4 A;
-        public Vector4 B;
-        public Vector4 C;
+        public Vector3 A;
+        public Vector3 B;
+        public Vector3 C;
         public Vector4 Color;
     }
 }

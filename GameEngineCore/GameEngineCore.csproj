@@ -6,11 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="axis.obj" />
     <None Remove="ship_concept.obj" />
     <None Remove="tinker.obj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="axis.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ship_concept.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
