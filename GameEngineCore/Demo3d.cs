@@ -138,7 +138,8 @@ namespace GameEngineCore
 
             target = _camera + _lookDirection;
 
-            var view = Matrix4x4.CreateLookAt(_camera, target, up);
+            //var view = Matrix4x4.CreateLookAt(_camera, target, up);
+            var view = MatrixHelpers.CreateLookAt(_camera, target, up);
 
             var trianglesToDraw = new List<Triangle>();
 
@@ -181,12 +182,13 @@ namespace GameEngineCore
                     Normal = Vector3.UnitZ,
                 };
 
-                var clippedTriangles = nearPlane.ClipAgainst(triangleViewed);
-                foreach (var clippedTriangle in clippedTriangles)
+                //var clippedTriangles = nearPlane.ClipAgainst(triangleViewed);
+                //foreach (var clippedTriangle in clippedTriangles)
                 {
                     // project from 3d to 2d screen coordinates
                     // scale into view, divide by w to get into cartesian space 'W'
-                    var triangleProjected = MultiplyMatrixVectorW(clippedTriangle, _projection);
+                      var triangleProjected = MultiplyMatrixVectorW(triangleViewed, _projection);
+                    //var triangleProjected = MultiplyMatrixVectorW(clippedTriangle, _projection);
 
                     triangleProjected.Color = GetColor(dp);
 
