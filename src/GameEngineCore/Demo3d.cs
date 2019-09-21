@@ -138,8 +138,8 @@ namespace GameEngineCore
 
             target = _camera + _lookDirection;
 
-            //var view = Matrix4x4.CreateLookAt(_camera, target, up);
-            var view = MatrixHelpers.CreateLookAt(_camera, target, up);
+            var view = Matrix4x4.CreateLookAt(_camera, target, up);
+            //var view = MatrixHelpers.CreateLookAt(_camera, target, up);
 
             var trianglesToDraw = new List<Triangle>();
 
