@@ -122,7 +122,7 @@ namespace GameEngineCore
                     this.Active = false;
                 }
 
-                SDLVideo.SetWindowTitle(_window, $"Console Game Engine - FPS: {1.0 / _average.ComputeAverage(elapsedS):F4}");
+                SDLVideo.SetWindowTitle(_window, $"Console Game Engine - FPS: {1.0 / elapsedS:F4}");
 
                 PresentFrame();
             }
@@ -262,10 +262,7 @@ namespace GameEngineCore
 
             void Drawline(int sx, int ex, int ny)
             {
-                for (var i = sx; i <= ex; i++)
-                {
-                    Draw(i, ny, col);
-                }
+                DrawLine(sx, ny, ex, ny, col);
             };
 
             int t2x;
@@ -430,8 +427,8 @@ namespace GameEngineCore
                 {
                     maxx = t2x;
                 }
-                Drawline(minx, maxx, y);    // Draw line from min to max points found on the y
-                                            // Now increase y
+                DrawLine(minx, y, maxx, y, col);    // Draw line from min to max points found on the y
+                                                    // Now increase y
                 if (!changed1) t1x += signx1;
                 t1x += t1xp;
                 if (!changed2) t2x += signx2;
@@ -541,7 +538,7 @@ namespace GameEngineCore
                 {
                     maxx = t2x;
                 }
-                Drawline(minx, maxx, y);
+                DrawLine(minx, y, maxx, y, col);
                 if (!changed1)
                 {
                     t1x += signx1;
@@ -559,99 +556,102 @@ namespace GameEngineCore
 
         protected void DrawLine(int x1, int y1, int x2, int y2, Vector4? col = null)
         {
-            var dx = x2 - x1;
-            var dy = y2 - y1;
-            var dx1 = Math.Abs(dx);
-            var dy1 = Math.Abs(dy);
+            SetColor(col ?? Vector4.One);
+            SDLRender.RenderDrawLine(_renderer, x1, y1, x2, y2);
 
-            var px = 2 * dy1 - dx1;
-            var py = 2 * dx1 - dy1;
+            //var dx = x2 - x1;
+            //var dy = y2 - y1;
+            //var dx1 = Math.Abs(dx);
+            //var dy1 = Math.Abs(dy);
 
-            int x;
-            int xe;
-            int y;
-            int ye;
+            //var px = 2 * dy1 - dx1;
+            //var py = 2 * dx1 - dy1;
 
-            if (dy1 <= dx1)
-            {
-                if (dx >= 0)
-                {
-                    x = x1;
-                    y = y1;
-                    xe = x2;
-                }
-                else
-                {
-                    x = x2;
-                    y = y2;
-                    xe = x1;
-                }
+            //int x;
+            //int xe;
+            //int y;
+            //int ye;
 
-                Draw(x, y, col);
+            //if (dy1 <= dx1)
+            //{
+            //    if (dx >= 0)
+            //    {
+            //        x = x1;
+            //        y = y1;
+            //        xe = x2;
+            //    }
+            //    else
+            //    {
+            //        x = x2;
+            //        y = y2;
+            //        xe = x1;
+            //    }
 
-                while (x < xe)
-                {
-                    x++;
-                    if (px < 0)
-                    {
-                        px += 2 * dy1;
-                    }
-                    else
-                    {
-                        if (dx < 0 && dy < 0 || dx > 0 && dy > 0)
-                        {
-                            y += 1;
-                        }
-                        else
-                        {
-                            y -= 1;
-                        }
+            //    Draw(x, y, col);
 
-                        px += 2 * (dy1 - dx1);
-                    }
+            //    while (x < xe)
+            //    {
+            //        x++;
+            //        if (px < 0)
+            //        {
+            //            px += 2 * dy1;
+            //        }
+            //        else
+            //        {
+            //            if (dx < 0 && dy < 0 || dx > 0 && dy > 0)
+            //            {
+            //                y += 1;
+            //            }
+            //            else
+            //            {
+            //                y -= 1;
+            //            }
 
-                    Draw(x, y, col);
-                }
-            }
-            else
-            {
-                if (dy >= 0)
-                {
-                    x = x1;
-                    y = y1;
-                    ye = y2;
-                }
-                else
-                {
-                    x = x2;
-                    y = y2;
-                    ye = y1;
-                }
+            //            px += 2 * (dy1 - dx1);
+            //        }
 
-                Draw(x, y, col);
+            //        Draw(x, y, col);
+            //    }
+            //}
+            //else
+            //{
+            //    if (dy >= 0)
+            //    {
+            //        x = x1;
+            //        y = y1;
+            //        ye = y2;
+            //    }
+            //    else
+            //    {
+            //        x = x2;
+            //        y = y2;
+            //        ye = y1;
+            //    }
 
-                while (y < ye)
-                {
-                    y += 1;
-                    if (py <= 0)
-                    {
-                        py += 2 * dx1;
-                    }
-                    else
-                    {
-                        if (dx < 0 && dy < 0 || dx > 0 && dy > 0)
-                        {
-                            x += 1;
-                        }
-                        else
-                        {
-                            x -= 1;
-                        }
-                        py += 2 * (dx1 - dy1);
-                    }
-                    Draw(x, y, col);
-                }
-            }
+            //    Draw(x, y, col);
+
+            //    while (y < ye)
+            //    {
+            //        y += 1;
+            //        if (py <= 0)
+            //        {
+            //            py += 2 * dx1;
+            //        }
+            //        else
+            //        {
+            //            if (dx < 0 && dy < 0 || dx > 0 && dy > 0)
+            //            {
+            //                x += 1;
+            //            }
+            //            else
+            //            {
+            //                x -= 1;
+            //            }
+            //            py += 2 * (dx1 - dy1);
+            //        }
+            //        Draw(x, y, col);
+            //    }
+            //}
         }
 
         private void Clip(ref int x, ref int y)
