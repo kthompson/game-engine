@@ -48,11 +48,11 @@ namespace GameEngineCore
             float dist(Vector3 p)
             {
                 //var np = Vector3.Normalize(p);
-                //var dot = Vector3.Dot(planeNormal, planePoint);
-                var dot = planeNormal.Length();
+                var dot = Vector3.Dot(planeNormal, planePoint);
+                //var dot = planeNormal.Length();
                 var planeNormalX = Vector3.Dot(planeNormal, p);
 
-                return planeNormalX / dot;
+                return planeNormalX - dot;
             }
 
             // https://youtu.be/HXSuNxpCzdM?t=2723

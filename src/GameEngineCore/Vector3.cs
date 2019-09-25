@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace GameEngineCore
 {
@@ -18,6 +20,32 @@ namespace GameEngineCore
             X = x;
             Y = y;
             Z = z;
+        }
+
+        public override string ToString()
+        {
+            return ToString("G", CultureInfo.CurrentCulture);
+        }
+
+        public string ToString(string? format)
+        {
+            return ToString(format, CultureInfo.CurrentCulture);
+        }
+
+        public string ToString(string? format, IFormatProvider? formatProvider)
+        {
+            StringBuilder sb = new StringBuilder();
+            string separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
+            sb.Append('<');
+            sb.Append(((IFormattable)this.X).ToString(format, formatProvider));
+            sb.Append(separator);
+            sb.Append(' ');
+            sb.Append(((IFormattable)this.Y).ToString(format, formatProvider));
+            sb.Append(separator);
+            sb.Append(' ');
+            sb.Append(((IFormattable)this.Z).ToString(format, formatProvider));
+            sb.Append('>');
+            return sb.ToString();
         }
 
         public static Vector3 Zero => new Vector3();

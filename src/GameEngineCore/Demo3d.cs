@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SharpSDL;
 
 namespace GameEngineCore
@@ -31,21 +32,27 @@ namespace GameEngineCore
     internal class Demo3d : ConsoleGameEngine
     {
         private Mesh _cube;
+
+        /// <summary>
+        /// Convert from View space to Screen space
+        /// </summary>
         private Matrix4x4 _projection;
-        private Matrix4x4 _rotateX = new Matrix4x4();
-        private Matrix4x4 _rotateZ = new Matrix4x4();
+
+        private Matrix4x4 _rotateX;
+        private Matrix4x4 _rotateZ;
         private Vector3 _camera = Vector3.Zero;
         private Vector3 _lookDirection = Vector3.UnitZ;
-        private float _yaw = 0;
+        private float _yaw;
 
-        private Vector3 OffsetOfView = new Vector3(1, 1, 0);
+        private Vector3 _offsetOfView = new Vector3(1, 1, 0);
 
-        private float theta;
+        private float _theta;
         private Plane _planeScreenTop;
         private Plane _planeScreenBottom;
         private Plane _planeScreenLeft;
         private Plane _planeScreenRight;
-        private bool _debugClipping = true;
+        private bool _debugClipping;
+        private bool _debugEdges;
 
         public Demo3d() : base(512, 480, 4, 4)
         {
@@ -77,7 +84,7 @@ namespace GameEngineCore
         protected override void OnInitialize()
         {
             //_cube = Mesh.ReadFromFile("ship_concept.obj");
-            _cube = Mesh.ReadFromFile("axis.obj");
+            _cube = Mesh.ReadFromFile("Assets/mountains.obj");
 
             // Projection matrix
             var near = 0.1f;
@@ -94,7 +101,16 @@ namespace GameEngineCore
 
         protected override bool OnUpdate(double elapsedSeconds)
         {
-            if (IsKeyPressed(ScanCode.SDL_SCANCODE_Q))
+            if (IsKeyUp(ScanCode.SDL_SCANCODE_F1))
+            {
+                _debugClipping = !_debugClipping;
+            }
+            if (IsKeyUp(ScanCode.SDL_SCANCODE_F2))
+            {
+                _debugEdges = !_debugEdges;
+            }
+
+            if (IsKeyUp(ScanCode.SDL_SCANCODE_Q))
             {
                 return false;
             }
@@ -143,13 +159,13 @@ namespace GameEngineCore
                 _yaw += (float)(2.0f * elapsedSeconds);
             }
 
-            //theta += (float)(0.001f * elapsedMs);
+            //_theta += (float)(1f * elapsedSeconds);
 
             // Update Z rotation matrix
-            _rotateZ = Matrix4x4.CreateRotationZ(theta * 0.5f);
+            _rotateZ = Matrix4x4.CreateRotationZ(_theta * 0.5f);
 
             // Update X rotation matrix
-            _rotateX = Matrix4x4.CreateRotationX(theta);
+            _rotateX = Matrix4x4.CreateRotationX(_theta);
 
             var translation = Matrix4x4.CreateTranslation(0, 0, 5);
 
@@ -166,7 +182,7 @@ namespace GameEngineCore
             //var view = Matrix4x4.CreateLookAt(_camera, target, up);
             var view = Matrix4x4.CreateLookAt(_camera, target, up);
 
-            var trianglesToDraw = new List<Triangle>();
+            var trianglesToRaster = new List<Triangle>();
 
             // Cull Triangles
             foreach (var triangle in _cube.Triangles)
@@ -216,9 +232,9 @@ namespace GameEngineCore
                     // scale into view, divide by w to get into cartesian space 'W'
                     var triangleProjected = MultiplyMatrixVectorW(clippedTriangle, _projection);
 
-                    triangleProjected.A += OffsetOfView;
-                    triangleProjected.B += OffsetOfView;
-                    triangleProjected.C += OffsetOfView;
+                    triangleProjected.A += _offsetOfView;
+                    triangleProjected.B += _offsetOfView;
+                    triangleProjected.C += _offsetOfView;
 
                     triangleProjected.A.X *= 0.5f * ScreenWidth;
                     triangleProjected.A.Y *= 0.5f * ScreenHeight;
@@ -227,12 +243,12 @@ namespace GameEngineCore
                     triangleProjected.C.X *= 0.5f * ScreenWidth;
                     triangleProjected.C.Y *= 0.5f * ScreenHeight;
 
-                    trianglesToDraw.Add(triangleProjected);
+                    trianglesToRaster.Add(triangleProjected);
                 }
             }
 
             // sort triangles from back to front
-            trianglesToDraw.Sort((t1, t2) =>
+            trianglesToRaster.Sort((t1, t2) =>
             {
                 var z1 = (t1.A.Z + t1.B.Z + t1.C.Z) / 3;
                 var z2 = (t2.A.Z + t2.B.Z + t2.C.Z) / 3;
@@ -242,65 +258,39 @@ namespace GameEngineCore
 
             ClearScreen(GetColor(Color.Cyan));
 
-            foreach (var triToRaster in trianglesToDraw)
+            // clip triangles against screen edges
+            var allTriangles = from triToRaster in trianglesToRaster
+                               from clipped in ClipScreen(triToRaster)
+                               select clipped;
+
+            foreach (var triangle in allTriangles)
             {
-                // clip triangles against screen edges
-
-                var listTriangles = new List<Triangle>();
-
-                // add initial triangle
-                listTriangles.Add(triToRaster);
-                var newTriangles = 1;
-
-                //TODO: clipping on right and bottom are not working
-                for (int p = 0; p < 2; p++)
+                FillTriangle(
+                    (int)triangle.A.X, (int)triangle.A.Y,
+                    (int)triangle.B.X, (int)triangle.B.Y,
+                    (int)triangle.C.X, (int)triangle.C.Y,
+                    triangle.Color
+                );
+                if (_debugEdges)
                 {
-                    while (newTriangles > 0)
-                    {
-                        var test = listTriangles[0];
-                        listTriangles.RemoveAt(0);
-                        newTriangles--;
-
-                        switch (p)
-                        {
-                            case 0:
-                                listTriangles.AddRange(_planeScreenTop.ClipAgainst(test, _debugClipping));
-                                break;
-                            case 1:
-                                listTriangles.AddRange(_planeScreenLeft.ClipAgainst(test, _debugClipping));
-                                break;
-                            case 2:
-                                listTriangles.AddRange(_planeScreenRight.ClipAgainst(test, _debugClipping));
-                                break;
-                            case 3:
-                                listTriangles.AddRange(_planeScreenBottom.ClipAgainst(test, _debugClipping));
-                                break;
-                        }
-                    }
-
-                    newTriangles = listTriangles.Count;
-                }
-
-                foreach (var triangle in listTriangles)
-                {
-                    FillTriangle(
-                        (int)triangle.A.X, (int)triangle.A.Y,
-                        (int)triangle.B.X, (int)triangle.B.Y,
-                        (int)triangle.C.X, (int)triangle.C.Y,
-                        triangle.Color
-                    );
                     DrawTriangle(
                         (int)triangle.A.X, (int)triangle.A.Y,
                         (int)triangle.B.X, (int)triangle.B.Y,
                         (int)triangle.C.X, (int)triangle.C.Y,
                         color: GetColor(Color.Black)
                     );
-                    
                 }
             }
 
             return base.OnUpdate(elapsedSeconds);
         }
+
+        private IEnumerable<Triangle> ClipScreen(Triangle triangle) =>
+            from topClipped in _planeScreenTop.ClipAgainst(triangle, _debugClipping)
+            from leftClipped in _planeScreenLeft.ClipAgainst(topClipped, _debugClipping)
+            from rightClipped in _planeScreenRight.ClipAgainst(leftClipped, _debugClipping)
+            from bottomClipped in _planeScreenBottom.ClipAgainst(rightClipped, _debugClipping)
+            select bottomClipped;
 
         private static Triangle MultiplyMatrixVectorW(Triangle i, Matrix4x4 m)
         {

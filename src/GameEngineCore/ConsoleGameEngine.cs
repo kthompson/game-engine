@@ -62,9 +62,17 @@ namespace GameEngineCore
         {
         }
 
+        private bool[] _lastKeys = null;
         private bool[] _keys = null;
 
-        protected bool IsKeyPressed(ScanCode code) => _keys[(int)code];
+        protected bool IsKeyPressed(ScanCode code) =>
+            _keys[(int)code];
+
+        protected bool IsKeyUp(ScanCode code) =>
+            _keys[(int)code] == false && _lastKeys != null && _lastKeys[(int)code];
+
+        protected bool IsKeyHeld(ScanCode code) =>
+            _keys[(int)code] && _lastKeys != null && _lastKeys[(int)code];
 
         public void Run()
         {
@@ -86,8 +94,10 @@ namespace GameEngineCore
 
                 // Handle Keyboard Input
 
-                // Handle events - we only care about mouse clicks and movement
+                _lastKeys = _keys;
                 _keys = SDLKeyboard.GetKeyboardState().ToArray();
+
+                // Handle events - we only care about mouse clicks and movement
                 while (SDLEvents.PollEvent2(out var evnt) != 0)
                 {
                     switch (evnt.Type)
@@ -96,10 +106,6 @@ namespace GameEngineCore
                             break;
 
                         case (uint)EventType.KEYDOWN:
-                            //var keyboardEvent = evnt.Key;
-                            //var keysym = keyboardEvent.Keysym;
-                            //Console.WriteLine($"Adding key event: {keysym.Scancode}");
-                            //_keys[keysym.Scancode] = keysym;
                             continue;
 
                         default:

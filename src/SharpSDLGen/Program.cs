@@ -12,45 +12,6 @@ namespace SharpSDLGen
 {
     internal class SDL : ILibrary
     {
-        //class RenameFilesPass : TranslationUnitPass
-        //{
-        //    public override bool VisitTranslationUnit(TranslationUnit unit)
-        //    {
-        //        if (!base.VisitTranslationUnit(unit))
-        //        {
-        //            return false;
-        //        }
-
-        //        unit.FileName = "";
-        //        unit.FileNameWithoutExtension = "";//CaseRenamePass.ConvertCaseString()
-
-        //            return true;
-
-        //    }
-        //}
-
-        private class RenameFilePass : TranslationUnitPass
-        {
-            public override bool VisitTranslationUnit(TranslationUnit unit)
-            {
-                return base.VisitTranslationUnit(unit);
-            }
-
-            //public override void VisitGeneratorOutput(GeneratorOutput output)
-            //{
-            //    if (output.TranslationUnit.FileNameWithoutExtension == "SDL_events")
-            //    {
-            //        //output.Outputs.ForEach(opt =>
-            //        //{
-            //        //    opt.RootBlock.Blocks.ForEach(blk =>
-            //        //    {
-            //        //        //blk.Kind
-            //        //    });
-            //        //});
-            //    }
-            //}
-        }
-
         public void Setup(Driver driver)
         {
             var options = driver.Options;
@@ -74,11 +35,6 @@ namespace SharpSDLGen
             driver.Context.TranslationUnitPasses.RemovePrefix("SDLK_");
             driver.Context.TranslationUnitPasses.RemovePrefix("KMOD_");
             driver.Context.TranslationUnitPasses.RemovePrefix("LOG_CATEGORY_");
-            //driver.Context.TranslationUnitPasses.RenameDeclsCase(RenameTargets.Any, RenameCasePattern.UpperCamelCase);
-
-            //driver.Context.TranslationUnitPasses.AddPass(new FunctionToInstanceMethodPass());
-
-            //driver.Context.GeneratorOutputPasses.AddPass(new RenameFilePass());
 
             driver.Options.GenerateName = unit =>
                 Regex.Replace(unit.FileNameWithoutExtension, "_[a-z]", m => m.Value[1].ToString().ToUpper());
@@ -101,6 +57,7 @@ namespace SharpSDLGen
             ctx.GenerateEnumFromMacros("HatState", "SDL_HAT_(.*)");
 
             ctx.IgnoreHeadersWithName("SDL_atomic*");
+            ctx.IgnoreHeadersWithName("SDLAtomic*");
             ctx.IgnoreHeadersWithName("SDL_endian*");
             ctx.IgnoreHeadersWithName("SDL_main*");
             ctx.IgnoreHeadersWithName("SDL_mutex*");

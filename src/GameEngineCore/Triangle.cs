@@ -14,5 +14,10 @@
         public Vector3 B;
         public Vector3 C;
         public Vector4 Color;
+
+        public override string ToString()
+        {
+            return $"A: {A}, B: {B}, C: {C}";
+        }
     }
 }
